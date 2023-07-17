@@ -1,4 +1,3 @@
-import React from "react";
 import { render, test, expect } from "@testing-library/react";
 import DummyComponent from "../DummyComponent";
 
