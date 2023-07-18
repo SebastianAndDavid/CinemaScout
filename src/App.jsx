@@ -1,17 +1,26 @@
-import { getMovieById, getMovieBySearch } from "./utlils/tmdb-utils";
+import { useState } from "react";
+import { getMovieBySearch } from "./utlils/tmdb-utils";
 
 function App() {
-  async function displayStuff() {
-    const data = await getMovieBySearch();
-    const dataById = await getMovieById();
-    console.log("dataById", dataById);
-    console.log("data from app", data);
-    return data, dataById;
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState({});
+
+  async function handleSubmit() {
+    const result = await getMovieBySearch(search);
+    setSearchResult(result);
   }
-  displayStuff();
+  console.log("searchResult", searchResult);
   return (
     <>
       <h1>Hello from TMDB-Search-Display</h1>
+      <form onSubmit={() => handleSubmit()}>
+        <input
+          placeholder="Search"
+          type="text"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
     </>
   );
 }
