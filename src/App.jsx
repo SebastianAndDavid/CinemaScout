@@ -3,13 +3,15 @@ import { getMovieBySearch } from "./utlils/tmdb-utils";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [staticSearch, setStaticSearch] = useState("");
   const [searchResult, setSearchResult] = useState({});
 
   async function handleSubmit() {
-    const result = await getMovieBySearch(search);
+    setStaticSearch(search);
+    const result = await getMovieBySearch(staticSearch);
     setSearchResult(result);
+    console.log("searchResult", searchResult);
   }
-  console.log("searchResult", searchResult);
   return (
     <>
       <h1>Hello from TMDB-Search-Display</h1>
@@ -21,6 +23,7 @@ function App() {
         />
         <button type="submit">Submit</button>
       </form>
+      <p>{searchResult.results}</p>
     </>
   );
 }
