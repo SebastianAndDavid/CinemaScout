@@ -5,8 +5,7 @@ async function getMovieBySearch(search) {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=${API_KEY}`
   );
-  const results = await response.json();
-  console.log("results", results);
+  const { results } = await response.json();
   return results;
 }
 
