@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getMovieBySearch } from "./utlils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
+import "./App.css";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -23,10 +24,11 @@ function App() {
       <button type="submit" onClick={() => handleSubmit()}>
         Submit
       </button>
-
-      {searchResult.map((movie, i) => {
-        return <MovieCard movieObject={movie} key={movie.id + i} />;
-      })}
+      <div className="movie-list-container">
+        {searchResult.map((movie, i) => {
+          return <MovieCard movieObject={movie} key={movie.id + i} />;
+        })}
+      </div>
     </>
   );
 }
