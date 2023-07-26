@@ -7,6 +7,18 @@ function App() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
+  const [isHover, setIsHover] = useState(false);
+
+  console.log("isHover", isHover);
+
+  function handleMouseEnter() {
+    setIsHover(true);
+    console.log("i entered");
+  }
+  function handleMouseLeave() {
+    setIsHover(false);
+    console.log("i left");
+  }
   async function handleSubmit() {
     const result = await getMovieBySearch(search);
     setSearchResult(result);
@@ -26,7 +38,14 @@ function App() {
       </button>
       <div className="movie-list-container">
         {searchResult.map((movie, i) => {
-          return <MovieCard movieObject={movie} key={movie.id + i} />;
+          return (
+            <MovieCard
+              movieObject={movie}
+              key={movie.id + i}
+              handleMouseEnter={handleMouseEnter}
+              handleMouseLeave={handleMouseLeave}
+            />
+          );
         })}
       </div>
     </>
