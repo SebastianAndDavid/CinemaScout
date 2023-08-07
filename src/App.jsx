@@ -42,14 +42,16 @@ function App() {
           if (isHover & (movie.id === movieId)) {
             return (
               <>
-                <div>Please Something</div>
-                <MovieCard
-                  movieObject={movie}
-                  key={movie.id + i}
-                  handleMouseEnter={handleMouseEnter}
-                  handleMouseLeave={handleMouseLeave}
-                  isHover={isHover}
-                />
+                <div className="movie-card-container">
+                  <h4>{movie.title}</h4>
+                  <MovieCard
+                    movieObject={movie}
+                    key={movie.id + i}
+                    handleMouseEnter={handleMouseEnter}
+                    // handleMouseLeave={handleMouseLeave}
+                    isHover={isHover}
+                  />
+                </div>
               </>
             );
           } else {
