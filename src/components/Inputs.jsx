@@ -4,23 +4,22 @@ import { useState } from "react";
 // onclick function here using spread operator
 
 export default function Inputs({ search, setSearch, handleSubmit }) {
-  //   const [toggle, setToggle] = useState(false);
   const [genreClick, setGenreClick] = useState([]);
 
   console.log("genreClick", genreClick);
 
-  function checkValue(array, e) {
-    const index = array.indexOf(e.target.value);
-    if (index === -1) {
-      setGenreClick([...genreClick, e.target.value]);
-    } else {
-      const updatedArray = array.filter((item) => item !== e.target.value);
+  function checkValue(array, value) {
+    if (array.includes(value)) {
+      const updatedArray = array.filter((item) => item !== value);
       setGenreClick(updatedArray);
+    } else {
+      setGenreClick([...array, value]);
     }
   }
 
   function handleGenreClick(e) {
-    checkValue(genreClick, e);
+    const value = e.target.value;
+    checkValue(genreClick, value);
   }
 
   //   function handleGenreClick(e) {
