@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getMovieBySearch } from "./utlils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
+import Inputs from "./components/Inputs";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -28,15 +29,11 @@ function App() {
   return (
     <>
       <h1>Hello from TMDB-Search-Display</h1>
-      <input
-        placeholder="Search"
-        value={search}
-        type="text"
-        onChange={(e) => setSearch(e.target.value)}
+      <Inputs
+        search={search}
+        setSearch={setSearch}
+        handleSubmit={handleSubmit}
       />
-      <button type="submit" onClick={() => handleSubmit()}>
-        Submit
-      </button>
       <div className="movie-list-container">
         {searchResult.map((movie, i) => {
           if (isHover & (movie.id === movieId)) {
@@ -48,7 +45,7 @@ function App() {
                     movieObject={movie}
                     key={movie.id + i}
                     handleMouseEnter={handleMouseEnter}
-                    // handleMouseLeave={handleMouseLeave}
+                    handleMouseLeave={handleMouseLeave}
                     isHover={isHover}
                   />
                 </div>
