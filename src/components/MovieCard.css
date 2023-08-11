@@ -29,7 +29,44 @@
 
 /* Inputs */
 
+.discover-container {
+  display: flex;
+  justify-content: center;
+}
+
 a {
+  color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.inputs-container {
+  border: 1px solid black;
+}
+
+.genres-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 30vw;
+}
+
+label {
+  display: flex;
+  align-items: flex-start;
+
+  width: 6vw;
+}
+
+.release-date-container {
+  display: flex;
+  align-items: center;
+}
+
+.release-date-container input {
+  height: 3vh;
+}
+
+.release-date-container button {
+  height: 4vh;
 }

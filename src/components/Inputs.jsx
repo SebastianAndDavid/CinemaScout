@@ -22,8 +22,8 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
   }
 
   return (
-    <>
-      <div>
+    <div className="inputs-container">
+      <div className="search-container">
         <input
           placeholder="Search"
           value={search}
@@ -34,52 +34,58 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
           Submit
         </button>
       </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            value={"35"}
-            onClick={(e) => handleGenreClick(e)}
-          />
-          Comedy
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value={"18"}
-            onClick={(e) => handleGenreClick(e)}
-          />
-          Drama
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value={"28"}
-            onClick={(e) => handleGenreClick(e)}
-          />
-          Action
-        </label>
-        {seeMoreClick &&
-          genreArray.map((genre, i) => {
-            return (
-              <label key={genre.id + i}>
-                <input
-                  type="checkbox"
-                  value={genre.id}
-                  onClick={(e) => handleGenreClick(e)}
-                />
-                {genre.name}
-              </label>
-            );
-          })}
-        <br></br>
-        {seeMoreClick ? (
-          <a onClick={() => setSeeMoreClick(false)}>See less</a>
-        ) : (
-          <a onClick={() => setSeeMoreClick(true)}>See more</a>
-        )}
+      <div className="discover-container">
+        <div className="genres-container">
+          <label>
+            <input
+              type="checkbox"
+              value={"35"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Comedy
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={"18"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Drama
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={"28"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Action
+          </label>
+          {seeMoreClick &&
+            genreArray.map((genre, i) => {
+              return (
+                <label key={genre.id + i}>
+                  <input
+                    type="checkbox"
+                    value={genre.id}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  {genre.name}
+                </label>
+              );
+            })}
+          <br></br>
+          {seeMoreClick ? (
+            <a onClick={() => setSeeMoreClick(false)}>See less</a>
+          ) : (
+            <a onClick={() => setSeeMoreClick(true)}>See more</a>
+          )}
+        </div>
+        <div className="release-date-container">
+          <input placeholder="Release date" />
+          <button>Discover</button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

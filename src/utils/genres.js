@@ -45,7 +45,7 @@ export const genreArray = [
   },
   {
     id: 878,
-    name: "Science Fiction",
+    name: "SciFi",
   },
   {
     id: 10770,
