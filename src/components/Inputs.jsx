@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { genreArray } from "../utils/genres";
+import { getDiscover } from "../utils/tmdb-utils";
 
-export default function Inputs({ search, setSearch, handleSubmit }) {
+export default function Inputs({
+  search,
+  setSearch,
+  handleSubmit,
+  setSearchResult,
+}) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
-  console.log("genreClick", genreClick);
+  const [releaseDateValue, setReleaseDateValue] = useState("");
 
   function checkValue(array, value) {
     if (array.includes(value)) {
@@ -19,6 +25,14 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
   function handleGenreClick(e) {
     const value = e.target.value;
     checkValue(genreClick, value);
+  }
+
+  async function handleDiscover() {
+    const genres = genreClick.join();
+    const { results } = await getDiscover(releaseDateValue, genres);
+    setSearchResult(results);
+    console.log("res", results);
+    // return res;
   }
 
   return (
@@ -81,8 +95,11 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
           )}
         </div>
         <div className="release-date-container">
-          <input placeholder="Release date" />
-          <button>Discover</button>
+          <input
+            placeholder="Release date"
+            onChange={(e) => setReleaseDateValue(e.target.value)}
+          />
+          <button onClick={() => handleDiscover()}>Discover</button>
         </div>
       </div>
     </div>
@@ -92,5 +109,6 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
 Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
+  setSearchResult: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };

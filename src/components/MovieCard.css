@@ -40,9 +40,9 @@ a {
   cursor: pointer;
 }
 
-.inputs-container {
+/* .inputs-container {
   border: 1px solid black;
-}
+} */
 
 .genres-container {
   display: flex;

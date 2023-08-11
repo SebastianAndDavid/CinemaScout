@@ -11,9 +11,6 @@ function App() {
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
 
-  console.log("searchResult", searchResult);
-
-  console.log("id", movieId);
   function handleMouseEnter(movieId) {
     setIsHover(true);
     setMovieId(movieId);
@@ -26,6 +23,7 @@ function App() {
     setSearchResult(result);
     setSearch("");
   }
+
   return (
     <>
       <h1>Hello from TMDB-Search-Display</h1>
@@ -33,6 +31,7 @@ function App() {
         search={search}
         setSearch={setSearch}
         handleSubmit={handleSubmit}
+        setSearchResult={setSearchResult}
       />
       <div className="movie-list-container">
         {searchResult.map((movie, i) => {
