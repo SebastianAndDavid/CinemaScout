@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getMovieBySearch } from "./utlils/tmdb-utils";
+import { getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";

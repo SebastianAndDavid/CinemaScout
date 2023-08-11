@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { genreArray } from "../utils/genres";
 
 export default function Inputs({ search, setSearch, handleSubmit }) {
   const [genreClick, setGenreClick] = useState([]);
-
+  const [seeMoreClick, setSeeMoreClick] = useState(false);
   console.log("genreClick", genreClick);
 
   function checkValue(array, value) {
@@ -18,6 +19,10 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
   function handleGenreClick(e) {
     const value = e.target.value;
     checkValue(genreClick, value);
+  }
+
+  function handleSeeMore() {
+    setSeeMoreClick(true);
   }
 
   return (
@@ -51,9 +56,28 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
           Drama
         </label>
         <label>
-          <input type="checkbox" value={28} />
+          <input
+            type="checkbox"
+            value={"28"}
+            onClick={(e) => handleGenreClick(e)}
+          />
           Action
         </label>
+        {seeMoreClick &&
+          genreArray.map((genre, i) => {
+            return (
+              <label key={genre.id + i}>
+                <input
+                  type="checkbox"
+                  value={genre.id}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                {genre.name}
+              </label>
+            );
+          })}
+        <br></br>
+        <a onClick={() => handleSeeMore()}>See more</a>
       </div>
     </>
   );

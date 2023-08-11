@@ -26,3 +26,10 @@
   height: 424.95px;
   margin: 0px 75px 0px 75px;
 }
+
+/* Inputs */
+
+a {
+  text-decoration: underline;
+  cursor: pointer;
+}
