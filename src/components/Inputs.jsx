@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-// onclick function here using spread operator
-
 export default function Inputs({ search, setSearch, handleSubmit }) {
   const [genreClick, setGenreClick] = useState([]);
 
@@ -22,27 +20,6 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
     checkValue(genreClick, value);
   }
 
-  //   function handleGenreClick(e) {
-  //     const arr = [];
-  //     console.log("arr", arr);
-  //     for (let i = 0; i <= genreClick.length; i++) {
-  //       console.log("genreClick[i]", genreClick[i]);
-  //       if (genreClick[i] !== e.target.value) {
-  //         arr.push(e.target.value);
-  //       }
-  //     }
-  //   }
-
-  //   function handleGenreClick(e) {
-  //     if (toggle === false) {
-  //       setGenreClick([...genreClick, e.target.value]) & setToggle(true);
-  //     } else {
-  //       setGenreClick("") & setToggle(false);
-  //     }
-  //   }
-
-  //
-
   return (
     <>
       <div>
@@ -60,7 +37,6 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
         <label>
           <input
             type="checkbox"
-            // should this be a string?
             value={"35"}
             onClick={(e) => handleGenreClick(e)}
           />
