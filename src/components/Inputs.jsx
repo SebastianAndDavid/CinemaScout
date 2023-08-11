@@ -21,10 +21,6 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
     checkValue(genreClick, value);
   }
 
-  function handleSeeMore() {
-    setSeeMoreClick(true);
-  }
-
   return (
     <>
       <div>
@@ -77,7 +73,11 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
             );
           })}
         <br></br>
-        <a onClick={() => handleSeeMore()}>See more</a>
+        {seeMoreClick ? (
+          <a onClick={() => setSeeMoreClick(false)}>See less</a>
+        ) : (
+          <a onClick={() => setSeeMoreClick(true)}>See more</a>
+        )}
       </div>
     </>
   );
