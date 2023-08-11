@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { genreArray } from "../utils/genres";
+import { getDiscover } from "../utils/tmdb-utils";
 
-// onclick function here using spread operator
-
-export default function Inputs({ search, setSearch, handleSubmit }) {
+export default function Inputs({
+  search,
+  setSearch,
+  handleSubmit,
+  setSearchResult,
+}) {
   const [genreClick, setGenreClick] = useState([]);
-
-  console.log("genreClick", genreClick);
+  const [seeMoreClick, setSeeMoreClick] = useState(false);
+  const [releaseDateValue, setReleaseDateValue] = useState("");
 
   function checkValue(array, value) {
     if (array.includes(value)) {
@@ -22,30 +27,17 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
     checkValue(genreClick, value);
   }
 
-  //   function handleGenreClick(e) {
-  //     const arr = [];
-  //     console.log("arr", arr);
-  //     for (let i = 0; i <= genreClick.length; i++) {
-  //       console.log("genreClick[i]", genreClick[i]);
-  //       if (genreClick[i] !== e.target.value) {
-  //         arr.push(e.target.value);
-  //       }
-  //     }
-  //   }
-
-  //   function handleGenreClick(e) {
-  //     if (toggle === false) {
-  //       setGenreClick([...genreClick, e.target.value]) & setToggle(true);
-  //     } else {
-  //       setGenreClick("") & setToggle(false);
-  //     }
-  //   }
-
-  //
+  async function handleDiscover() {
+    const genres = genreClick.join();
+    const { results } = await getDiscover(releaseDateValue, genres);
+    setSearchResult(results);
+    console.log("res", results);
+    // return res;
+  }
 
   return (
-    <>
-      <div>
+    <div className="inputs-container">
+      <div className="search-container">
         <input
           placeholder="Search"
           value={search}
@@ -56,35 +48,67 @@ export default function Inputs({ search, setSearch, handleSubmit }) {
           Submit
         </button>
       </div>
-      <div>
-        <label>
+      <div className="discover-container">
+        <div className="genres-container">
+          <label>
+            <input
+              type="checkbox"
+              value={"35"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Comedy
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={"18"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Drama
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={"28"}
+              onClick={(e) => handleGenreClick(e)}
+            />
+            Action
+          </label>
+          {seeMoreClick &&
+            genreArray.map((genre, i) => {
+              return (
+                <label key={genre.id + i}>
+                  <input
+                    type="checkbox"
+                    value={genre.id}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  {genre.name}
+                </label>
+              );
+            })}
+          <br></br>
+          {seeMoreClick ? (
+            <a onClick={() => setSeeMoreClick(false)}>See less</a>
+          ) : (
+            <a onClick={() => setSeeMoreClick(true)}>See more</a>
+          )}
+        </div>
+        <div className="release-date-container">
           <input
-            type="checkbox"
-            // should this be a string?
-            value={"35"}
-            onClick={(e) => handleGenreClick(e)}
+            placeholder="Release date"
+            onChange={(e) => setReleaseDateValue(e.target.value)}
           />
-          Comedy
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value={"18"}
-            onClick={(e) => handleGenreClick(e)}
-          />
-          Drama
-        </label>
-        <label>
-          <input type="checkbox" value={28} />
-          Action
-        </label>
+          <button onClick={() => handleDiscover()}>Discover</button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
 Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
+  setSearchResult: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
