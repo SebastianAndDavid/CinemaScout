@@ -8,6 +8,7 @@ export default function Inputs({
   setSearch,
   handleSubmit,
   setSearchResult,
+  setIsChecked,
 }) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
@@ -31,8 +32,8 @@ export default function Inputs({
     const genres = genreClick.join();
     const { results } = await getDiscover(releaseDateValue, genres);
     setSearchResult(results);
-    console.log("res", results);
-    // return res;
+    setReleaseDateValue("");
+    setIsChecked(true);
   }
 
   return (
@@ -97,6 +98,7 @@ export default function Inputs({
         <div className="release-date-container">
           <input
             placeholder="Release date"
+            value={releaseDateValue}
             onChange={(e) => setReleaseDateValue(e.target.value)}
           />
           <button onClick={() => handleDiscover()}>Discover</button>
