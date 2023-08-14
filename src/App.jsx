@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
@@ -10,6 +10,8 @@ function App() {
 
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
+  console.log("isChecked", isChecked);
 
   function handleMouseEnter(movieId) {
     setIsHover(true);
@@ -24,15 +26,22 @@ function App() {
     setSearch("");
   }
 
+  useEffect(() => {
+    setIsChecked(false);
+  }, [searchResult]);
+
   return (
     <>
       <h1>Hello from TMDB-Search-Display</h1>
-      <Inputs
-        search={search}
-        setSearch={setSearch}
-        handleSubmit={handleSubmit}
-        setSearchResult={setSearchResult}
-      />
+      {!isChecked && (
+        <Inputs
+          search={search}
+          setSearch={setSearch}
+          handleSubmit={handleSubmit}
+          setSearchResult={setSearchResult}
+          setIsChecked={setIsChecked}
+        />
+      )}
       <div className="movie-list-container">
         {searchResult.map((movie, i) => {
           if (isHover & (movie.id === movieId)) {

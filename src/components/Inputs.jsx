@@ -8,6 +8,7 @@ export default function Inputs({
   setSearch,
   handleSubmit,
   setSearchResult,
+  setIsChecked,
 }) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
@@ -32,6 +33,7 @@ export default function Inputs({
     const { results } = await getDiscover(releaseDateValue, genres);
     setSearchResult(results);
     setReleaseDateValue("");
+    setIsChecked(true);
   }
 
   return (
