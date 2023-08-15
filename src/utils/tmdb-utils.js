@@ -25,7 +25,6 @@ async function getDiscover(year, genres) {
   );
 
   const results = await response.json();
-  console.log("results", results);
   return results;
 }
 

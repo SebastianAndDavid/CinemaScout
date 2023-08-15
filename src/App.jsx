@@ -11,7 +11,9 @@ function App() {
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
-  console.log("isChecked", isChecked);
+  const [didClickDiscover, setDidClickDiscover] = useState(false);
+
+  console.log("searchResult", searchResult);
 
   function handleMouseEnter(movieId) {
     setIsHover(true);
@@ -40,39 +42,44 @@ function App() {
           handleSubmit={handleSubmit}
           setSearchResult={setSearchResult}
           setIsChecked={setIsChecked}
+          setDidClickDiscover={setDidClickDiscover}
         />
       )}
       <div className="movie-list-container">
-        {searchResult.map((movie, i) => {
-          if (isHover & (movie.id === movieId)) {
-            return (
-              <>
-                <div className="movie-card-container">
-                  <h4>{movie.title}</h4>
+        {searchResult.length <= 0 && didClickDiscover ? (
+          <p>Sorry, no results!</p>
+        ) : (
+          searchResult.map((movie, i) => {
+            if (isHover & (movie.id === movieId)) {
+              return (
+                <>
+                  <div className="movie-card-container">
+                    <h4>{movie.title}</h4>
+                    <MovieCard
+                      movieObject={movie}
+                      key={movie.id + i}
+                      handleMouseEnter={handleMouseEnter}
+                      handleMouseLeave={handleMouseLeave}
+                      isHover={isHover}
+                    />
+                  </div>
+                </>
+              );
+            } else {
+              return (
+                <>
                   <MovieCard
                     movieObject={movie}
-                    key={movie.id + i}
+                    key={movie.id + i + 1}
                     handleMouseEnter={handleMouseEnter}
                     handleMouseLeave={handleMouseLeave}
                     isHover={isHover}
                   />
-                </div>
-              </>
-            );
-          } else {
-            return (
-              <>
-                <MovieCard
-                  movieObject={movie}
-                  key={movie.id + i + 1}
-                  handleMouseEnter={handleMouseEnter}
-                  handleMouseLeave={handleMouseLeave}
-                  isHover={isHover}
-                />
-              </>
-            );
-          }
-        })}
+                </>
+              );
+            }
+          })
+        )}
       </div>
     </>
   );

@@ -9,6 +9,7 @@ export default function Inputs({
   handleSubmit,
   setSearchResult,
   setIsChecked,
+  setDidClickDiscover,
 }) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
@@ -40,6 +41,7 @@ export default function Inputs({
       setSearchResult(results);
       setReleaseDateValue("");
       setIsChecked(true);
+      setDidClickDiscover(true);
     }
   }
 
@@ -120,6 +122,7 @@ Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   setSearchResult: PropTypes.func.isRequired,
+  setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
