@@ -29,13 +29,10 @@ export default function Inputs({
   }
 
   async function handleDiscover() {
-    if (releaseDateValue === "") {
-      const genres = genreClick.join();
-      const { results } = await getDiscover(releaseDateValue, genres);
-      setSearchResult(results);
-      setReleaseDateValue("");
-      setIsChecked(true);
-    } else if (releaseDateValue < 1888 || releaseDateValue > 2026) {
+    if (
+      (releaseDateValue != "") & (releaseDateValue < 1888) ||
+      releaseDateValue > 2026
+    ) {
       return alert("Please enter a valid date between 1888 and present");
     } else {
       const genres = genreClick.join();
