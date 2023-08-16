@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovieBySearch } from "./utils/tmdb-utils";
+import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
@@ -13,7 +13,10 @@ function App() {
   const [isChecked, setIsChecked] = useState(false);
   const [didClickDiscover, setDidClickDiscover] = useState(false);
 
-  console.log("searchResult", searchResult);
+  async function handleMovieCardClick(id) {
+    const result = await getDetailsById(id);
+    console.log("result", result);
+  }
 
   function handleMouseEnter(movieId) {
     setIsHover(true);
@@ -56,6 +59,7 @@ function App() {
                   <div className="movie-card-container">
                     <h4>{movie.title}</h4>
                     <MovieCard
+                      handleMovieCardClick={handleMovieCardClick}
                       movieObject={movie}
                       key={movie.id + i}
                       handleMouseEnter={handleMouseEnter}
@@ -69,6 +73,7 @@ function App() {
               return (
                 <>
                   <MovieCard
+                    handleMovieCardClick={handleMovieCardClick}
                     movieObject={movie}
                     key={movie.id + i + 1}
                     handleMouseEnter={handleMouseEnter}

@@ -28,4 +28,13 @@ async function getDiscover(year, genres) {
   return results;
 }
 
-export { getMovieBySearch, getMovieById, getDiscover };
+async function getDetailsById(id) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=46db8a5c2f862f015781b602a58bdd9d`
+  );
+
+  const results = await response.json();
+  return results;
+}
+
+export { getMovieBySearch, getMovieById, getDiscover, getDetailsById };

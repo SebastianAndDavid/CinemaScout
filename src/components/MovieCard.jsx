@@ -6,12 +6,14 @@ export default function MovieCard({
   movieObject,
   handleMouseEnter,
   handleMouseLeave,
+  handleMovieCardClick,
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
   return (
     <>
       <div
         className="movie-card"
+        onClick={() => handleMovieCardClick(movieObject.id)}
         onMouseEnter={() => handleMouseEnter(movieObject.id)}
         onMouseLeave={() => handleMouseLeave()}
       >
@@ -27,4 +29,5 @@ MovieCard.propTypes = {
   movieObject: PropTypes.object.isRequired,
   handleMouseEnter: PropTypes.func.isRequired,
   handleMouseLeave: PropTypes.func.isRequired,
+  handleMovieCardClick: PropTypes.func.isRequired,
 };
