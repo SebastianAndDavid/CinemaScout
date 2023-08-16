@@ -3,10 +3,13 @@ import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
+import DetailCard from "./components/DetailCard";
 
 function App() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [movieDetails, setMovieDetails] = useState({});
+  const [didClickMovieCard, setDidClickMovieCard] = useState(false);
 
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
@@ -15,6 +18,8 @@ function App() {
 
   async function handleMovieCardClick(id) {
     const result = await getDetailsById(id);
+    setMovieDetails(result);
+    setDidClickMovieCard(true);
     console.log("result", result);
   }
 
@@ -48,44 +53,50 @@ function App() {
           setDidClickDiscover={setDidClickDiscover}
         />
       )}
-      <div className="movie-list-container">
-        {searchResult.length <= 0 && didClickDiscover ? (
-          <p>Sorry, no results!</p>
-        ) : (
-          searchResult.map((movie, i) => {
-            if (isHover & (movie.id === movieId)) {
-              return (
-                <>
-                  <div className="movie-card-container">
-                    <h4>{movie.title}</h4>
+      {didClickMovieCard ? (
+        <div className="detail-container">
+          <DetailCard movieDetails={movieDetails} />
+        </div>
+      ) : (
+        <div className="movie-list-container">
+          {searchResult.length <= 0 && didClickDiscover ? (
+            <p>Sorry, no results!</p>
+          ) : (
+            searchResult.map((movie, i) => {
+              if (isHover & (movie.id === movieId)) {
+                return (
+                  <>
+                    <div className="movie-card-container">
+                      <h4>{movie.title}</h4>
+                      <MovieCard
+                        handleMovieCardClick={handleMovieCardClick}
+                        movieObject={movie}
+                        key={movie.id + i}
+                        handleMouseEnter={handleMouseEnter}
+                        handleMouseLeave={handleMouseLeave}
+                        isHover={isHover}
+                      />
+                    </div>
+                  </>
+                );
+              } else {
+                return (
+                  <>
                     <MovieCard
                       handleMovieCardClick={handleMovieCardClick}
                       movieObject={movie}
-                      key={movie.id + i}
+                      key={movie.id + i + 1}
                       handleMouseEnter={handleMouseEnter}
                       handleMouseLeave={handleMouseLeave}
                       isHover={isHover}
                     />
-                  </div>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <MovieCard
-                    handleMovieCardClick={handleMovieCardClick}
-                    movieObject={movie}
-                    key={movie.id + i + 1}
-                    handleMouseEnter={handleMouseEnter}
-                    handleMouseLeave={handleMouseLeave}
-                    isHover={isHover}
-                  />
-                </>
-              );
-            }
-          })
-        )}
-      </div>
+                  </>
+                );
+              }
+            })
+          )}
+        </div>
+      )}
     </>
   );
 }
