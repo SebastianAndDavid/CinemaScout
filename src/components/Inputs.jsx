@@ -9,6 +9,7 @@ export default function Inputs({
   handleSubmit,
   setSearchResult,
   setIsChecked,
+  setDidClickDiscover,
 }) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
@@ -29,11 +30,19 @@ export default function Inputs({
   }
 
   async function handleDiscover() {
-    const genres = genreClick.join();
-    const { results } = await getDiscover(releaseDateValue, genres);
-    setSearchResult(results);
-    setReleaseDateValue("");
-    setIsChecked(true);
+    if (
+      (releaseDateValue != "") & (releaseDateValue < 1888) ||
+      releaseDateValue > 2026
+    ) {
+      return alert("Please enter a valid date between 1888 and present");
+    } else {
+      const genres = genreClick.join();
+      const { results } = await getDiscover(releaseDateValue, genres);
+      setSearchResult(results);
+      setReleaseDateValue("");
+      setIsChecked(true);
+      setDidClickDiscover(true);
+    }
   }
 
   return (
@@ -99,6 +108,7 @@ export default function Inputs({
           <input
             placeholder="Release date"
             value={releaseDateValue}
+            type="number"
             onChange={(e) => setReleaseDateValue(e.target.value)}
           />
           <button onClick={() => handleDiscover()}>Discover</button>
@@ -112,5 +122,7 @@ Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   setSearchResult: PropTypes.func.isRequired,
+  setDidClickDiscover: PropTypes.func.isRequired,
+  setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
