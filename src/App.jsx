@@ -11,6 +11,8 @@ function App() {
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
 
+  console.log("searchResult", searchResult);
+
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -34,6 +36,7 @@ function App() {
     const result = await getMovieBySearch(search);
     setSearchResult(result);
     setSearch("");
+    setDidClickMovieCard(false);
   }
 
   useEffect(() => {
@@ -45,6 +48,7 @@ function App() {
       <h1>Hello from TMDB-Search-Display</h1>
       {!isChecked && (
         <Inputs
+          setDidClickMovieCard={setDidClickMovieCard}
           search={search}
           setSearch={setSearch}
           handleSubmit={handleSubmit}
@@ -55,7 +59,10 @@ function App() {
       )}
       {didClickMovieCard ? (
         <div className="detail-container">
-          <DetailCard movieDetails={movieDetails} />
+          <DetailCard
+            movieDetails={movieDetails}
+            setDidClickMovieCard={setDidClickMovieCard}
+          />
         </div>
       ) : (
         <div className="movie-list-container">

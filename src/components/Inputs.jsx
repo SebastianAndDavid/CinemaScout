@@ -10,6 +10,7 @@ export default function Inputs({
   setSearchResult,
   setIsChecked,
   setDidClickDiscover,
+  setDidClickMovieCard,
 }) {
   const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
@@ -30,6 +31,7 @@ export default function Inputs({
   }
 
   async function handleDiscover() {
+    setDidClickMovieCard(false);
     if (
       (releaseDateValue != "") & (releaseDateValue < 1888) ||
       releaseDateValue > 2026
@@ -125,4 +127,5 @@ Inputs.propTypes = {
   setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  setDidClickMovieCard: PropTypes.func.isRequired,
 };
