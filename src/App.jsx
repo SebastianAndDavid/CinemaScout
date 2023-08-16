@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
-import { getMovieBySearch } from "./utils/tmdb-utils";
+import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
+import DetailCard from "./components/DetailCard";
 
 function App() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [movieDetails, setMovieDetails] = useState({});
+  const [didClickMovieCard, setDidClickMovieCard] = useState(false);
+
+  console.log("searchResult", searchResult);
 
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [didClickDiscover, setDidClickDiscover] = useState(false);
 
-  console.log("searchResult", searchResult);
+  async function handleMovieCardClick(id) {
+    const result = await getDetailsById(id);
+    setMovieDetails(result);
+    setDidClickMovieCard(true);
+    console.log("result", result);
+  }
 
   function handleMouseEnter(movieId) {
     setIsHover(true);
@@ -26,6 +36,7 @@ function App() {
     const result = await getMovieBySearch(search);
     setSearchResult(result);
     setSearch("");
+    setDidClickMovieCard(false);
   }
 
   useEffect(() => {
@@ -37,6 +48,7 @@ function App() {
       <h1>Hello from TMDB-Search-Display</h1>
       {!isChecked && (
         <Inputs
+          setDidClickMovieCard={setDidClickMovieCard}
           search={search}
           setSearch={setSearch}
           handleSubmit={handleSubmit}
@@ -45,42 +57,53 @@ function App() {
           setDidClickDiscover={setDidClickDiscover}
         />
       )}
-      <div className="movie-list-container">
-        {searchResult.length <= 0 && didClickDiscover ? (
-          <p>Sorry, no results!</p>
-        ) : (
-          searchResult.map((movie, i) => {
-            if (isHover & (movie.id === movieId)) {
-              return (
-                <>
-                  <div className="movie-card-container">
-                    <h4>{movie.title}</h4>
+      {didClickMovieCard ? (
+        <div className="detail-container">
+          <DetailCard
+            movieDetails={movieDetails}
+            setDidClickMovieCard={setDidClickMovieCard}
+          />
+        </div>
+      ) : (
+        <div className="movie-list-container">
+          {searchResult.length <= 0 && didClickDiscover ? (
+            <p>Sorry, no results!</p>
+          ) : (
+            searchResult.map((movie, i) => {
+              if (isHover & (movie.id === movieId)) {
+                return (
+                  <>
+                    <div className="movie-card-container">
+                      <h4>{movie.title}</h4>
+                      <MovieCard
+                        handleMovieCardClick={handleMovieCardClick}
+                        movieObject={movie}
+                        key={movie.id + i}
+                        handleMouseEnter={handleMouseEnter}
+                        handleMouseLeave={handleMouseLeave}
+                        isHover={isHover}
+                      />
+                    </div>
+                  </>
+                );
+              } else {
+                return (
+                  <>
                     <MovieCard
+                      handleMovieCardClick={handleMovieCardClick}
                       movieObject={movie}
-                      key={movie.id + i}
+                      key={movie.id + i + 1}
                       handleMouseEnter={handleMouseEnter}
                       handleMouseLeave={handleMouseLeave}
                       isHover={isHover}
                     />
-                  </div>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <MovieCard
-                    movieObject={movie}
-                    key={movie.id + i + 1}
-                    handleMouseEnter={handleMouseEnter}
-                    handleMouseLeave={handleMouseLeave}
-                    isHover={isHover}
-                  />
-                </>
-              );
-            }
-          })
-        )}
-      </div>
+                  </>
+                );
+              }
+            })
+          )}
+        </div>
+      )}
     </>
   );
 }
