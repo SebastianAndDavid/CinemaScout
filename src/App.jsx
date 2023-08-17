@@ -46,20 +46,22 @@ function App() {
   return (
     <>
       <div className="parent">
-        <div className="header">
-          <h1>Hello from TMDB-Search-Display</h1>
-          {!isChecked && (
-            <Inputs
-              setDidClickMovieCard={setDidClickMovieCard}
-              search={search}
-              setSearch={setSearch}
-              handleSubmit={handleSubmit}
-              setSearchResult={setSearchResult}
-              setIsChecked={setIsChecked}
-              setDidClickDiscover={setDidClickDiscover}
-            />
-          )}
-        </div>
+        {!didClickMovieCard && (
+          <div className="header">
+            <h1>Hello from TMDB-Search-Display</h1>
+            {!isChecked && (
+              <Inputs
+                setDidClickMovieCard={setDidClickMovieCard}
+                search={search}
+                setSearch={setSearch}
+                handleSubmit={handleSubmit}
+                setSearchResult={setSearchResult}
+                setIsChecked={setIsChecked}
+                setDidClickDiscover={setDidClickDiscover}
+              />
+            )}
+          </div>
+        )}
 
         <div className="movie-list-container">
           {searchResult.length <= 0 && didClickDiscover ? (

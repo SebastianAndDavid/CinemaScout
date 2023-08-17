@@ -81,7 +81,9 @@ label {
 .detail-container {
   position: absolute;
   z-index: 2;
-  left: 36.8%;
+  /* left: 36.8%; */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.573);
 }
 
 /* Parent */
