@@ -8,7 +8,7 @@ export default function DetailCard({ movieDetails, setDidClickMovieCard }) {
       <h3>{movieDetails.title}</h3>
       <h4>{movieDetails.tagline}</h4>
       <img
-        style={{ width: "240px", height: "360px" }}
+        style={{ width: "480px", height: "720px" }}
         src={BASE_POSTER_URL + movieDetails.poster_path}
       />
     </div>

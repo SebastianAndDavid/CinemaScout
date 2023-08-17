@@ -45,26 +45,22 @@ function App() {
 
   return (
     <>
-      <h1>Hello from TMDB-Search-Display</h1>
-      {!isChecked && (
-        <Inputs
-          setDidClickMovieCard={setDidClickMovieCard}
-          search={search}
-          setSearch={setSearch}
-          handleSubmit={handleSubmit}
-          setSearchResult={setSearchResult}
-          setIsChecked={setIsChecked}
-          setDidClickDiscover={setDidClickDiscover}
-        />
-      )}
-      {didClickMovieCard ? (
-        <div className="detail-container">
-          <DetailCard
-            movieDetails={movieDetails}
-            setDidClickMovieCard={setDidClickMovieCard}
-          />
+      <div className="parent">
+        <div className="header">
+          <h1>Hello from TMDB-Search-Display</h1>
+          {!isChecked && (
+            <Inputs
+              setDidClickMovieCard={setDidClickMovieCard}
+              search={search}
+              setSearch={setSearch}
+              handleSubmit={handleSubmit}
+              setSearchResult={setSearchResult}
+              setIsChecked={setIsChecked}
+              setDidClickDiscover={setDidClickDiscover}
+            />
+          )}
         </div>
-      ) : (
+
         <div className="movie-list-container">
           {searchResult.length <= 0 && didClickDiscover ? (
             <p>Sorry, no results!</p>
@@ -103,7 +99,15 @@ function App() {
             })
           )}
         </div>
-      )}
+        <div className="detail-container">
+          {didClickMovieCard && (
+            <DetailCard
+              movieDetails={movieDetails}
+              setDidClickMovieCard={setDidClickMovieCard}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 }

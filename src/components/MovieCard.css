@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .movie-card-container {
@@ -27,6 +29,13 @@
   margin: 0px 75px 0px 75px;
 }
 
+/* Header */
+
+header {
+  position: relative;
+  z-index: 1;
+}
+
 /* Inputs */
 
 .discover-container {
@@ -39,10 +48,6 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* .inputs-container {
-  border: 1px solid black;
-} */
 
 .genres-container {
   display: flex;
@@ -69,4 +74,19 @@ label {
 
 .release-date-container button {
   height: 4vh;
+}
+
+/* Detail Component */
+
+.detail-container {
+  position: absolute;
+  z-index: 2;
+  left: 36.8%;
+}
+
+/* Parent */
+
+.parent {
+  display: flex;
+  flex-direction: column;
 }
