@@ -10,7 +10,7 @@ function App() {
   const [searchResult, setSearchResult] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
-
+  // conditionally set movie-list-container's opacity based on didClickMovieCard
   console.log("searchResult", searchResult);
 
   const [isHover, setIsHover] = useState(false);
@@ -21,8 +21,13 @@ function App() {
   async function handleMovieCardClick(id) {
     const result = await getDetailsById(id);
     setMovieDetails(result);
+    document.body.style.overflow = "hidden";
     setDidClickMovieCard(true);
-    console.log("result", result);
+  }
+
+  function handleDetailCardClick() {
+    document.body.style.overflow = "";
+    setDidClickMovieCard(false);
   }
 
   function handleMouseEnter(movieId) {
@@ -63,7 +68,13 @@ function App() {
           </div>
         )}
 
-        <div className="movie-list-container">
+        <div
+          className={
+            didClickMovieCard
+              ? "movie-list-container-opaque"
+              : "movie-list-container"
+          }
+        >
           {searchResult.length <= 0 && didClickDiscover ? (
             <p>Sorry, no results!</p>
           ) : (
@@ -105,7 +116,8 @@ function App() {
           {didClickMovieCard && (
             <DetailCard
               movieDetails={movieDetails}
-              setDidClickMovieCard={setDidClickMovieCard}
+              // setDidClickMovieCard={setDidClickMovieCard}
+              handleDetailCardClick={handleDetailCardClick}
             />
           )}
         </div>

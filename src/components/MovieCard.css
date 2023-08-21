@@ -6,6 +6,15 @@
   z-index: 1;
 }
 
+.movie-list-container-opaque {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  opacity: 30%;
+}
+
 .movie-card-container {
   display: flex;
   flex-direction: column;
@@ -79,11 +88,17 @@ label {
 /* Detail Component */
 
 .detail-container {
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  /* left: 36.8%; */
+  /* padding-bottom: 10000px; */
   width: 100%;
   background-color: rgba(0, 0, 0, 0.573);
+}
+
+.detail-card {
+  /* padding-right: 5px; */
+  padding-bottom: 10000px;
+  color: white;
 }
 
 /* Parent */

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
-export default function DetailCard({ movieDetails, setDidClickMovieCard }) {
+export default function DetailCard({ movieDetails, handleDetailCardClick }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
   return (
-    <div onClick={() => setDidClickMovieCard(false)}>
+    <div className="detail-card" onClick={() => handleDetailCardClick()}>
       <h3>{movieDetails.title}</h3>
       <h4>{movieDetails.tagline}</h4>
       <img
@@ -17,5 +17,5 @@ export default function DetailCard({ movieDetails, setDidClickMovieCard }) {
 
 DetailCard.propTypes = {
   movieDetails: PropTypes.object.isRequired,
-  setDidClickMovieCard: PropTypes.func.isRequired,
+  handleDetailCardClick: PropTypes.func.isRequired,
 };
