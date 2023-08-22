@@ -11,10 +11,7 @@ export default function DetailCard({ movieDetails, handleDetailCardClick }) {
         <a className="carrot-1"></a>
       </div>
       <div className="detail-image">
-        <img
-          style={{ width: "480px", height: "720px" }}
-          src={BASE_POSTER_URL + movieDetails.poster_path}
-        />
+        <img src={BASE_POSTER_URL + movieDetails.poster_path} />
       </div>
       <div className="detail-text">
         <h3>{movieDetails.title}</h3>
