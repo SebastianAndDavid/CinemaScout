@@ -96,10 +96,33 @@ label {
 }
 
 .detail-card {
-  /* padding-right: 5px; */
-  padding-bottom: 10000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25vh;
+  padding-bottom: 100vh;
   color: white;
 }
+
+.carrot-1 {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  background: url("https://d2q63o9r0h0ohi.cloudfront.net/images/homepage_left_arrow.20ef98c80cbb7cc3909e0add6a729e64.png")
+    0px center no-repeat;
+}
+
+.carrot-2 {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  background: url("https://d2q63o9r0h0ohi.cloudfront.net/images/homepage_right_arrow.90e5c27f527cacdfdc031a38428c5fc5.png")
+    0px center no-repeat;
+}
+
+/*
+arrow image
+ https://d2q63o9r0h0ohi.cloudfront.net/images/homepage_right_arrow.90e5c27f527cacdfdc031a38428c5fc5.png */
 
 /* Parent */
 
