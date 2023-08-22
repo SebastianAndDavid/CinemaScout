@@ -135,9 +135,13 @@ label {
     0px center no-repeat;
 }
 
-/*
-arrow image
- https://d2q63o9r0h0ohi.cloudfront.net/images/homepage_right_arrow.90e5c27f527cacdfdc031a38428c5fc5.png */
+.x-button {
+  height: 100px;
+  width: 100px;
+  color: gold;
+  font-size: 20vh;
+  font-weight: bolder;
+}
 
 /* Parent */
 

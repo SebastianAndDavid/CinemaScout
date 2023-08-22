@@ -21,6 +21,9 @@ export default function DetailCard({ movieDetails, handleDetailCardClick }) {
       <div>
         <a className="carrot-2"></a>
       </div>
+      <div className="x-container">
+        <div className="x-button">&times;</div>
+      </div>
     </div>
   );
 }
