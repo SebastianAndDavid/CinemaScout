@@ -10,8 +10,7 @@ function App() {
   const [searchResult, setSearchResult] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
-  // conditionally set movie-list-container's opacity based on didClickMovieCard
-  console.log("searchResult", searchResult);
+  const [didClickCarrot, setDidClickCarrot] = useState(false);
 
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
@@ -25,9 +24,30 @@ function App() {
     setDidClickMovieCard(true);
   }
 
+  async function handleCarrotClick(movieId, carrotDirection) {
+    const currentMovieIndex = searchResult
+      .map((movie) => movie.id)
+      .indexOf(movieId);
+
+    if (carrotDirection === "right") {
+      const results = await getDetailsById(
+        searchResult[currentMovieIndex + 1].id
+      );
+      setMovieDetails(results);
+      setDidClickCarrot(true);
+    } else if (carrotDirection === "left") {
+      const results = await getDetailsById(
+        searchResult[currentMovieIndex - 1].id
+      );
+      setMovieDetails(results);
+      setDidClickCarrot(true);
+    }
+  }
+
   function handleDetailCardClick() {
     document.body.style.overflow = "";
     setDidClickMovieCard(false);
+    setDidClickCarrot(false);
   }
 
   function handleMouseEnter(movieId) {
@@ -113,11 +133,11 @@ function App() {
           )}
         </div>
         <div className="detail-container">
-          {didClickMovieCard && (
+          {(didClickMovieCard || didClickCarrot) && (
             <DetailCard
               movieDetails={movieDetails}
-              // setDidClickMovieCard={setDidClickMovieCard}
               handleDetailCardClick={handleDetailCardClick}
+              handleCarrotClick={handleCarrotClick}
             />
           )}
         </div>
