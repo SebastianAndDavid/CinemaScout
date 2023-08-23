@@ -131,6 +131,11 @@ label {
     0px center no-repeat;
 }
 
+.carrot-1:hover {
+  transform: translateX(-5px);
+  transition: all 0.2s;
+}
+
 .carrot-container-2 {
   display: flex;
   justify-content: flex-start;
@@ -145,12 +150,21 @@ label {
     0px center no-repeat;
 }
 
+.carrot-2:hover {
+  transform: translateX(5px);
+  transition: all 0.2s;
+}
+.x-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+}
 .x-button {
-  height: 100px;
-  width: 100px;
   color: gold;
-  font-size: 20vh;
+  font-size: 75px;
   font-weight: bolder;
+  cursor: pointer;
+  height: 75px;
 }
 
 /* Parent */
