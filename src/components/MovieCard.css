@@ -91,7 +91,7 @@ label {
   position: fixed;
   z-index: 2;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.573);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .detail-card {
