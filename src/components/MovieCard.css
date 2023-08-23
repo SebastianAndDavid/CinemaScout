@@ -117,6 +117,12 @@ label {
   width: 18vw;
 }
 
+.carrot-container-1 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .carrot-1 {
   display: flex;
   height: 100px;
@@ -125,6 +131,12 @@ label {
     0px center no-repeat;
 }
 
+.carrot-container-2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+}
 .carrot-2 {
   display: flex;
   height: 100px;

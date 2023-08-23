@@ -7,7 +7,7 @@ export default function DetailCard({ movieDetails, handleDetailCardClick }) {
 
   return (
     <div className="detail-card" onClick={() => handleDetailCardClick()}>
-      <div>
+      <div className="carrot-container-1">
         <a className="carrot-1"></a>
       </div>
       <div className="detail-image">
@@ -18,7 +18,7 @@ export default function DetailCard({ movieDetails, handleDetailCardClick }) {
         <h4>{movieDetails.tagline}</h4>
         <p>{movieDetails.overview}</p>
       </div>
-      <div>
+      <div className="carrot-container-2">
         <a className="carrot-2"></a>
       </div>
       <div className="x-container">
