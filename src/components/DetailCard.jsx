@@ -7,6 +7,8 @@ export default function DetailCard({
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
+  console.log("movieDetails", movieDetails);
+
   return (
     <div className="detail-card">
       <div className="carrot-container-1">
@@ -20,8 +22,29 @@ export default function DetailCard({
       </div>
       <div className="detail-text">
         <h3>{movieDetails.title}</h3>
-        <h4>{movieDetails.tagline}</h4>
+        {movieDetails.tagline && <h4>{movieDetails.tagline}</h4>}
+
+        <div className="releasedate-runtime">
+          <p>Release Date: {movieDetails.release_date}</p>
+          <p>Runtime: {movieDetails.runtime}</p>
+        </div>
+        {movieDetails.homepage && (
+          <a href={movieDetails.homepage} target="blank">
+            Official Page
+          </a>
+        )}
         <p>{movieDetails.overview}</p>
+        <div className="credits">
+          <div className="director">
+            <p>Quentin</p>
+          </div>
+          <div className="actor-list">
+            <p>John Smith</p>
+            <p>Amy Smith</p>
+            <p>Bill Hader</p>
+            <p>Hill Bader</p>
+          </div>
+        </div>
       </div>
       <div className="carrot-container-2">
         <a
