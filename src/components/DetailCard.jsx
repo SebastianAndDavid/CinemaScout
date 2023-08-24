@@ -8,7 +8,7 @@ export default function DetailCard({
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
   return (
-    <div className="detail-card" onClick={() => handleDetailCardClick()}>
+    <div className="detail-card">
       <div className="carrot-container-1">
         <a
           className="carrot-1"
@@ -30,7 +30,9 @@ export default function DetailCard({
         ></a>
       </div>
       <div className="x-container">
-        <div className="x-button">&times;</div>
+        <div className="x-button" onClick={() => handleDetailCardClick()}>
+          &times;
+        </div>
       </div>
     </div>
   );
