@@ -17,6 +17,16 @@ function App() {
   const [isChecked, setIsChecked] = useState(false);
   const [didClickDiscover, setDidClickDiscover] = useState(false);
 
+  // This is a framework for seemore functionality
+
+  // console.log("searchResult", searchResult);
+
+  // function addMore() {
+  // const seeMoreRes = fetch()
+
+  //   setSearchResult([...searchResult, ...seeMoreRes]);
+  // }
+
   async function handleMovieCardClick(id) {
     const result = await getDetailsById(id);
     setMovieDetails(result);
@@ -141,6 +151,7 @@ function App() {
             />
           )}
         </div>
+        {/* <button onClick={() => addMore()}>more?</button> */}
       </div>
     </>
   );
