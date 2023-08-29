@@ -11,8 +11,10 @@ export default function Inputs({
   setIsChecked,
   setDidClickDiscover,
   setDidClickMovieCard,
+  setGenreClick,
+  genreClick,
 }) {
-  const [genreClick, setGenreClick] = useState([]);
+  // const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
   const [releaseDateValue, setReleaseDateValue] = useState("");
 
@@ -128,4 +130,6 @@ Inputs.propTypes = {
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   setDidClickMovieCard: PropTypes.func.isRequired,
+  setGenreClick: PropTypes.func.isRequired,
+  genreClick: PropTypes.array.isRequired,
 };

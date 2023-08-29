@@ -6,9 +6,9 @@ import Inputs from "./components/Inputs";
 import DetailCard from "./components/DetailCard";
 
 function App() {
+  const [genreClick, setGenreClick] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  console.log("searchResult", searchResult);
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
   const [didClickCarrot, setDidClickCarrot] = useState(false);
@@ -20,7 +20,7 @@ function App() {
   const [persistentSearch, setPersistentSearch] = useState("");
 
   // res will be ternery for either getMovieBySearch or getDiscover
-  async function handleSeeMoreClick() {
+  async function handleSeeMoreResultsClick() {
     const res = await getMovieBySearch(persistentSearch, page + 1);
     setSearchResult([...searchResult, ...res]);
     setPage(page + 1);
@@ -87,6 +87,8 @@ function App() {
             <h1>Hello from TMDB-Search-Display</h1>
             {!isChecked && (
               <Inputs
+                genreClick={genreClick}
+                setGenreClick={setGenreClick}
                 setDidClickMovieCard={setDidClickMovieCard}
                 search={search}
                 setSearch={setSearch}
@@ -152,7 +154,7 @@ function App() {
           )}
         </div>
         {searchResult.length % 20 === 0 && searchResult.length !== 0 && (
-          <button onClick={() => handleSeeMoreClick()}>more?</button>
+          <button onClick={() => handleSeeMoreResultsClick()}>more?</button>
         )}
       </div>
     </>
