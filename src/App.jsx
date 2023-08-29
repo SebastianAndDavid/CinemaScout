@@ -11,11 +11,13 @@ function App() {
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
   const [didClickCarrot, setDidClickCarrot] = useState(false);
-
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [didClickDiscover, setDidClickDiscover] = useState(false);
+  const [page, setPage] = useState(1);
+  const [persistentSearch, setPersistentSearch] = useState("");
+  console.log(persistentSearch);
 
   // This is a framework for seemore functionality
 
@@ -25,6 +27,10 @@ function App() {
   // const seeMoreRes = fetch()
 
   //   setSearchResult([...searchResult, ...seeMoreRes]);
+  // }
+
+  // async function handleSeeMoreClick() {
+  //   const res = await getMovieBySearch(search, page + 1);
   // }
 
   async function handleMovieCardClick(id) {
@@ -70,6 +76,7 @@ function App() {
   async function handleSubmit() {
     const result = await getMovieBySearch(search);
     setSearchResult(result);
+    setPersistentSearch(search);
     setSearch("");
     setDidClickMovieCard(false);
   }
