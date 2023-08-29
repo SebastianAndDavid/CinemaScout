@@ -6,16 +6,31 @@ import Inputs from "./components/Inputs";
 import DetailCard from "./components/DetailCard";
 
 function App() {
+  const [genreClick, setGenreClick] = useState([]);
+  const [persistentGenreClick, setPersistentGenreClick] = useState([]);
+  console.log("persistentGenreClick", persistentGenreClick);
+  const [releaseDateValue, setReleaseDateValue] = useState("");
+  const [persistentReleaseDateValue, setPersistentReleaseDateValue] =
+    useState("");
+  console.log("persistentReleaseDateValue", persistentReleaseDateValue);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
   const [didClickCarrot, setDidClickCarrot] = useState(false);
-
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [didClickDiscover, setDidClickDiscover] = useState(false);
+  const [page, setPage] = useState(1);
+  const [persistentSearch, setPersistentSearch] = useState("");
+
+  // res will be ternery for either getMovieBySearch or getDiscover
+  async function handleSeeMoreResultsClick() {
+    const res = await getMovieBySearch(persistentSearch, page + 1);
+    setSearchResult([...searchResult, ...res]);
+    setPage(page + 1);
+  }
 
   async function handleMovieCardClick(id) {
     const result = await getDetailsById(id);
@@ -60,7 +75,9 @@ function App() {
   async function handleSubmit() {
     const result = await getMovieBySearch(search);
     setSearchResult(result);
+    setPersistentSearch(search);
     setSearch("");
+    setPage(1);
     setDidClickMovieCard(false);
   }
 
@@ -76,6 +93,14 @@ function App() {
             <h1>Hello from TMDB-Search-Display</h1>
             {!isChecked && (
               <Inputs
+                // persistentGenreClick={persistentGenreClick}
+                setPersistentGenreClick={setPersistentGenreClick}
+                // persistentReleaseDateValue={PersistentReleaseDateValue}
+                setPersistentReleaseDateValue={setPersistentReleaseDateValue}
+                releaseDateValue={releaseDateValue}
+                setReleaseDateValue={setReleaseDateValue}
+                genreClick={genreClick}
+                setGenreClick={setGenreClick}
                 setDidClickMovieCard={setDidClickMovieCard}
                 search={search}
                 setSearch={setSearch}
@@ -87,7 +112,6 @@ function App() {
             )}
           </div>
         )}
-
         <div
           className={
             didClickMovieCard
@@ -141,6 +165,9 @@ function App() {
             />
           )}
         </div>
+        {searchResult.length % 20 === 0 && searchResult.length !== 0 && (
+          <button onClick={() => handleSeeMoreResultsClick()}>more?</button>
+        )}
       </div>
     </>
   );
