@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
+import {
+  getDetailsById,
+  getDiscover,
+  getMovieBySearch,
+} from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
@@ -18,6 +22,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
 
+  // res will be ternery for either getMovieBySearch or getDiscover
   async function handleSeeMoreClick() {
     const res = await getMovieBySearch(persistentSearch, page + 1);
     setSearchResult([...searchResult, ...res]);
@@ -96,7 +101,6 @@ function App() {
             )}
           </div>
         )}
-
         <div
           className={
             didClickMovieCard
@@ -150,7 +154,9 @@ function App() {
             />
           )}
         </div>
-        <button onClick={() => handleSeeMoreClick()}>more?</button>
+        {searchResult.length >= 19 && (
+          <button onClick={() => handleSeeMoreClick()}>more?</button>
+        )}
       </div>
     </>
   );
