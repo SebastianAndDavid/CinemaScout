@@ -13,10 +13,16 @@ export default function Inputs({
   setDidClickMovieCard,
   setGenreClick,
   genreClick,
+  releaseDateValue,
+  setReleaseDateValue,
+  // persistentGenreClick,
+  setPersistentGenreClick,
+  // persistentReleaseDateValue,
+  setPersistentReleaseDateValue,
 }) {
-  // const [genreClick, setGenreClick] = useState([]);
   const [seeMoreClick, setSeeMoreClick] = useState(false);
-  const [releaseDateValue, setReleaseDateValue] = useState("");
+
+  console.log("genreClick", genreClick);
 
   function checkValue(array, value) {
     if (array.includes(value)) {
@@ -43,9 +49,12 @@ export default function Inputs({
       const genres = genreClick.join();
       const { results } = await getDiscover(releaseDateValue, genres);
       setSearchResult(results);
-      setReleaseDateValue("");
+      setPersistentGenreClick(genreClick);
+      setPersistentReleaseDateValue(releaseDateValue);
       setIsChecked(true);
       setDidClickDiscover(true);
+      setReleaseDateValue("");
+      setGenreClick([]);
     }
   }
 
@@ -125,11 +134,17 @@ export default function Inputs({
 Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
+  releaseDateValue: PropTypes.string.isRequired,
+  persistentReleaseDateValue: PropTypes.string.isRequired,
   setSearchResult: PropTypes.func.isRequired,
   setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   setDidClickMovieCard: PropTypes.func.isRequired,
   setGenreClick: PropTypes.func.isRequired,
+  setPersistentGenreClick: PropTypes.func.isRequired,
+  setPersistentReleaseDateValue: PropTypes.func.isRequired,
+  setReleaseDateValue: PropTypes.func.isRequired,
   genreClick: PropTypes.array.isRequired,
+  persistentGenreClick: PropTypes.array.isRequired,
 };

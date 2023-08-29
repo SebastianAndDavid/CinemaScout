@@ -7,6 +7,12 @@ import DetailCard from "./components/DetailCard";
 
 function App() {
   const [genreClick, setGenreClick] = useState([]);
+  const [persistentGenreClick, setPersistentGenreClick] = useState([]);
+  console.log("persistentGenreClick", persistentGenreClick);
+  const [releaseDateValue, setReleaseDateValue] = useState("");
+  const [persistentReleaseDateValue, setPersistentReleaseDateValue] =
+    useState("");
+  console.log("persistentReleaseDateValue", persistentReleaseDateValue);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
@@ -87,6 +93,12 @@ function App() {
             <h1>Hello from TMDB-Search-Display</h1>
             {!isChecked && (
               <Inputs
+                // persistentGenreClick={persistentGenreClick}
+                setPersistentGenreClick={setPersistentGenreClick}
+                // persistentReleaseDateValue={PersistentReleaseDateValue}
+                setPersistentReleaseDateValue={setPersistentReleaseDateValue}
+                releaseDateValue={releaseDateValue}
+                setReleaseDateValue={setReleaseDateValue}
                 genreClick={genreClick}
                 setGenreClick={setGenreClick}
                 setDidClickMovieCard={setDidClickMovieCard}
