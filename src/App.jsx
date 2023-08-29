@@ -17,21 +17,12 @@ function App() {
   const [didClickDiscover, setDidClickDiscover] = useState(false);
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
-  console.log(persistentSearch);
 
-  // This is a framework for seemore functionality
-
-  // console.log("searchResult", searchResult);
-
-  // function addMore() {
-  // const seeMoreRes = fetch()
-
-  //   setSearchResult([...searchResult, ...seeMoreRes]);
-  // }
-
-  // async function handleSeeMoreClick() {
-  //   const res = await getMovieBySearch(search, page + 1);
-  // }
+  async function handleSeeMoreClick() {
+    const res = await getMovieBySearch(persistentSearch, page + 1);
+    setSearchResult([...searchResult, ...res]);
+    setPage(page + 1);
+  }
 
   async function handleMovieCardClick(id) {
     const result = await getDetailsById(id);
@@ -78,6 +69,7 @@ function App() {
     setSearchResult(result);
     setPersistentSearch(search);
     setSearch("");
+    setPage(1);
     setDidClickMovieCard(false);
   }
 
@@ -158,7 +150,7 @@ function App() {
             />
           )}
         </div>
-        {/* <button onClick={() => addMore()}>more?</button> */}
+        <button onClick={() => handleSeeMoreClick()}>more?</button>
       </div>
     </>
   );
