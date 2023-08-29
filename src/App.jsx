@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getDetailsById,
-  getDiscover,
-  getMovieBySearch,
-} from "./utils/tmdb-utils";
+import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
@@ -12,6 +8,7 @@ import DetailCard from "./components/DetailCard";
 function App() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  console.log("searchResult", searchResult);
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
   const [didClickCarrot, setDidClickCarrot] = useState(false);
@@ -154,7 +151,7 @@ function App() {
             />
           )}
         </div>
-        {searchResult.length >= 19 && (
+        {searchResult.length % 20 === 0 && searchResult.length !== 0 && (
           <button onClick={() => handleSeeMoreClick()}>more?</button>
         )}
       </div>
