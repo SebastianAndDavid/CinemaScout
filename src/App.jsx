@@ -84,7 +84,8 @@ function App() {
   function handleMouseLeave() {
     setIsHover(false);
   }
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     const result = await getMovieBySearch(search);
     setSearchResult(result);
     setPersistentSearch(search);

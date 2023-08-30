@@ -36,7 +36,8 @@ export default function Inputs({
     checkValue(genreClick, value);
   }
 
-  async function handleDiscover() {
+  async function handleDiscover(e) {
+    e.preventDefault();
     setDidClickMovieCard(false);
     if (
       (releaseDateValue != "") & (releaseDateValue < 1888) ||
@@ -66,15 +67,17 @@ export default function Inputs({
         )}
         {!inputToggle ? (
           <div className="search-container">
-            <input
-              placeholder="Search"
-              value={search}
-              type="text"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button type="submit" onClick={() => handleSubmit()}>
-              Submit
-            </button>
+            <form>
+              <input
+                placeholder="Search"
+                value={search}
+                type="text"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button type="submit" onClick={(e) => handleSubmit(e)}>
+                Submit
+              </button>
+            </form>
           </div>
         ) : (
           <div className="discover-container">
@@ -124,13 +127,15 @@ export default function Inputs({
               )}
             </div>
             <div className="release-date-container">
-              <input
-                placeholder="Release date"
-                value={releaseDateValue}
-                type="number"
-                onChange={(e) => setReleaseDateValue(e.target.value)}
-              />
-              <button onClick={() => handleDiscover()}>Discover</button>
+              <form>
+                <input
+                  placeholder="Release date"
+                  value={releaseDateValue}
+                  type="number"
+                  onChange={(e) => setReleaseDateValue(e.target.value)}
+                />
+                <button onClick={(e) => handleDiscover(e)}>Discover</button>
+              </form>
             </div>
           </div>
         )}
