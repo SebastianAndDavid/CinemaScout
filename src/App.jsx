@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
+import {
+  getDetailsById,
+  getDiscover,
+  getMovieBySearch,
+} from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
@@ -24,10 +28,19 @@ function App() {
   const [persistentSearch, setPersistentSearch] = useState("");
   const [toggle, setToggle] = useState(false);
 
-  // res will be ternery for either getMovieBySearch or getDiscover
   async function handleSeeMoreResultsClick() {
-    const res = await getMovieBySearch(persistentSearch, page + 1);
-    setSearchResult([...searchResult, ...res]);
+    if (!toggle) {
+      const res = await getMovieBySearch(persistentSearch, page + 1);
+      setSearchResult([...searchResult, ...res]);
+    } else {
+      const { results } = await getDiscover(
+        persistentReleaseDateValue,
+        persistentGenreClick,
+        page + 1
+      );
+      setSearchResult([...searchResult, ...results]);
+    }
+
     setPage(page + 1);
   }
 

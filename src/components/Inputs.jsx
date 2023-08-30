@@ -22,8 +22,6 @@ export default function Inputs({
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
 
-  console.log("genreClick", genreClick);
-
   function checkValue(array, value) {
     if (array.includes(value)) {
       const updatedArray = array.filter((item) => item !== value);
@@ -145,7 +143,6 @@ Inputs.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   releaseDateValue: PropTypes.string.isRequired,
-  persistentReleaseDateValue: PropTypes.string.isRequired,
   setSearchResult: PropTypes.func.isRequired,
   toggle: PropTypes.bool.isRequired,
   setToggle: PropTypes.func.isRequired,
@@ -158,5 +155,4 @@ Inputs.propTypes = {
   setPersistentReleaseDateValue: PropTypes.func.isRequired,
   setReleaseDateValue: PropTypes.func.isRequired,
   genreClick: PropTypes.array.isRequired,
-  persistentGenreClick: PropTypes.array.isRequired,
 };
