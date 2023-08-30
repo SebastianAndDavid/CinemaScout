@@ -26,10 +26,10 @@ function App() {
   const [didClickDiscover, setDidClickDiscover] = useState(false);
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [inputToggle, setInputToggle] = useState(false);
 
   async function handleSeeMoreResultsClick() {
-    if (!toggle) {
+    if (!inputToggle) {
       const res = await getMovieBySearch(persistentSearch, page + 1);
       setSearchResult([...searchResult, ...res]);
     } else {
@@ -105,8 +105,8 @@ function App() {
             <h1>Hello from TMDB-Search-Display</h1>
             {!isChecked && (
               <Inputs
-                toggle={toggle}
-                setToggle={setToggle}
+                inputToggle={inputToggle}
+                setInputToggle={setInputToggle}
                 setPersistentGenreClick={setPersistentGenreClick}
                 setPersistentReleaseDateValue={setPersistentReleaseDateValue}
                 releaseDateValue={releaseDateValue}

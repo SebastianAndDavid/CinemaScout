@@ -17,8 +17,8 @@ export default function Inputs({
   setReleaseDateValue,
   setPersistentGenreClick,
   setPersistentReleaseDateValue,
-  toggle,
-  setToggle,
+  inputToggle,
+  setInputToggle,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
 
@@ -59,12 +59,12 @@ export default function Inputs({
   return (
     <div className="inputs-container">
       <>
-        {!toggle ? (
-          <button onClick={() => setToggle(true)}>Toggle</button>
+        {!inputToggle ? (
+          <button onClick={() => setInputToggle(true)}>See Discover</button>
         ) : (
-          <button onClick={() => setToggle(false)}>Toggle</button>
+          <button onClick={() => setInputToggle(false)}>See Search</button>
         )}
-        {!toggle ? (
+        {!inputToggle ? (
           <div className="search-container">
             <input
               placeholder="Search"
@@ -144,8 +144,8 @@ Inputs.propTypes = {
   setSearch: PropTypes.func.isRequired,
   releaseDateValue: PropTypes.string.isRequired,
   setSearchResult: PropTypes.func.isRequired,
-  toggle: PropTypes.bool.isRequired,
-  setToggle: PropTypes.func.isRequired,
+  inputToggle: PropTypes.bool.isRequired,
+  setInputToggle: PropTypes.func.isRequired,
   setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
