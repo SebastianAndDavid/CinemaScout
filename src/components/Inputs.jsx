@@ -15,10 +15,10 @@ export default function Inputs({
   genreClick,
   releaseDateValue,
   setReleaseDateValue,
-  // persistentGenreClick,
   setPersistentGenreClick,
-  // persistentReleaseDateValue,
   setPersistentReleaseDateValue,
+  toggle,
+  setToggle,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
 
@@ -60,73 +60,83 @@ export default function Inputs({
 
   return (
     <div className="inputs-container">
-      <div className="search-container">
-        <input
-          placeholder="Search"
-          value={search}
-          type="text"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type="submit" onClick={() => handleSubmit()}>
-          Submit
-        </button>
-      </div>
-      <div className="discover-container">
-        <div className="genres-container">
-          <label>
+      <>
+        {!toggle ? (
+          <button onClick={() => setToggle(true)}>Toggle</button>
+        ) : (
+          <button onClick={() => setToggle(false)}>Toggle</button>
+        )}
+        {!toggle ? (
+          <div className="search-container">
             <input
-              type="checkbox"
-              value={"35"}
-              onClick={(e) => handleGenreClick(e)}
+              placeholder="Search"
+              value={search}
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
             />
-            Comedy
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value={"18"}
-              onClick={(e) => handleGenreClick(e)}
-            />
-            Drama
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value={"28"}
-              onClick={(e) => handleGenreClick(e)}
-            />
-            Action
-          </label>
-          {seeMoreClick &&
-            genreArray.map((genre, i) => {
-              return (
-                <label key={genre.id + i}>
-                  <input
-                    type="checkbox"
-                    value={genre.id}
-                    onClick={(e) => handleGenreClick(e)}
-                  />
-                  {genre.name}
-                </label>
-              );
-            })}
-          <br></br>
-          {seeMoreClick ? (
-            <a onClick={() => setSeeMoreClick(false)}>See less</a>
-          ) : (
-            <a onClick={() => setSeeMoreClick(true)}>See more</a>
-          )}
-        </div>
-        <div className="release-date-container">
-          <input
-            placeholder="Release date"
-            value={releaseDateValue}
-            type="number"
-            onChange={(e) => setReleaseDateValue(e.target.value)}
-          />
-          <button onClick={() => handleDiscover()}>Discover</button>
-        </div>
-      </div>
+            <button type="submit" onClick={() => handleSubmit()}>
+              Submit
+            </button>
+          </div>
+        ) : (
+          <div className="discover-container">
+            <div className="genres-container">
+              <label>
+                <input
+                  type="checkbox"
+                  value={"35"}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                Comedy
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={"18"}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                Drama
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={"28"}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                Action
+              </label>
+              {seeMoreClick &&
+                genreArray.map((genre, i) => {
+                  return (
+                    <label key={genre.id + i}>
+                      <input
+                        type="checkbox"
+                        value={genre.id}
+                        onClick={(e) => handleGenreClick(e)}
+                      />
+                      {genre.name}
+                    </label>
+                  );
+                })}
+              <br></br>
+              {seeMoreClick ? (
+                <a onClick={() => setSeeMoreClick(false)}>See less</a>
+              ) : (
+                <a onClick={() => setSeeMoreClick(true)}>See more</a>
+              )}
+            </div>
+            <div className="release-date-container">
+              <input
+                placeholder="Release date"
+                value={releaseDateValue}
+                type="number"
+                onChange={(e) => setReleaseDateValue(e.target.value)}
+              />
+              <button onClick={() => handleDiscover()}>Discover</button>
+            </div>
+          </div>
+        )}
+      </>
     </div>
   );
 }
@@ -137,6 +147,8 @@ Inputs.propTypes = {
   releaseDateValue: PropTypes.string.isRequired,
   persistentReleaseDateValue: PropTypes.string.isRequired,
   setSearchResult: PropTypes.func.isRequired,
+  toggle: PropTypes.bool.isRequired,
+  setToggle: PropTypes.func.isRequired,
   setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
