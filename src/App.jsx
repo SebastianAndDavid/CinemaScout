@@ -28,6 +28,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
+  const [cast, setCast] = useState([]);
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -46,7 +47,8 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
-    await getCreditsById(9988);
+    const castResult = await getCreditsById(id);
+    setCast(castResult);
     const result = await getDetailsById(id);
     setMovieDetails(result);
     document.body.style.overflow = "hidden";
@@ -62,12 +64,20 @@ function App() {
       const results = await getDetailsById(
         searchResult[currentMovieIndex + 1].id
       );
+      const castResult = await getCreditsById(
+        searchResult[currentMovieIndex + 1].id
+      );
+      setCast(castResult);
       setMovieDetails(results);
       setDidClickCarrot(true);
     } else if (carrotDirection === "left") {
       const results = await getDetailsById(
         searchResult[currentMovieIndex - 1].id
       );
+      const castResult = await getCreditsById(
+        searchResult[currentMovieIndex + 1].id
+      );
+      setCast(castResult);
       setMovieDetails(results);
       setDidClickCarrot(true);
     }
@@ -177,6 +187,7 @@ function App() {
               movieDetails={movieDetails}
               handleDetailCardClick={handleDetailCardClick}
               handleCarrotClick={handleCarrotClick}
+              cast={cast}
             />
           )}
         </div>

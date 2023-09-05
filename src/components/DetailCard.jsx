@@ -4,6 +4,7 @@ export default function DetailCard({
   movieDetails,
   handleDetailCardClick,
   handleCarrotClick,
+  cast,
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -39,7 +40,7 @@ export default function DetailCard({
             <p>Quentin</p>
           </div>
           <div className="actor-list">
-            <p>John Smith</p>
+            <p>{cast[0].name}</p>
             <p>Amy Smith</p>
             <p>Bill Hader</p>
             <p>Hill Bader</p>
@@ -65,4 +66,5 @@ DetailCard.propTypes = {
   movieDetails: PropTypes.object.isRequired,
   handleDetailCardClick: PropTypes.func.isRequired,
   handleCarrotClick: PropTypes.func.isRequired,
+  cast: PropTypes.array.isRequired,
 };
