@@ -4,10 +4,11 @@ export default function DetailCard({
   movieDetails,
   handleDetailCardClick,
   handleCarrotClick,
+  credits,
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
-  console.log("movieDetails", movieDetails);
+  const director = credits.crew.filter((person) => person.job === "Director");
 
   return (
     <div className="detail-card">
@@ -36,13 +37,14 @@ export default function DetailCard({
         <p>{movieDetails.overview}</p>
         <div className="credits">
           <div className="director">
-            <p>Quentin</p>
+            {director && <p>{director[0].name}</p>}
+            {director[1] && <p>{director[1].name}</p>}
           </div>
           <div className="actor-list">
-            <p>John Smith</p>
-            <p>Amy Smith</p>
-            <p>Bill Hader</p>
-            <p>Hill Bader</p>
+            {credits.cast[0] && <p>{credits.cast[0].name}</p>}
+            {credits.cast[1] && <p>{credits.cast[1].name}</p>}
+            {credits.cast[2] && <p>{credits.cast[2].name}</p>}
+            {credits.cast[3] && <p>{credits.cast[3].name}</p>}
           </div>
         </div>
       </div>
@@ -65,4 +67,5 @@ DetailCard.propTypes = {
   movieDetails: PropTypes.object.isRequired,
   handleDetailCardClick: PropTypes.func.isRequired,
   handleCarrotClick: PropTypes.func.isRequired,
+  credits: PropTypes.object.isRequired,
 };

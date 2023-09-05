@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  getCreditsById,
   getDetailsById,
   getDiscover,
   getMovieBySearch,
@@ -27,6 +28,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
+  const [credits, setCredits] = useState([]);
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -45,6 +47,8 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
+    const creditResult = await getCreditsById(id);
+    setCredits(creditResult);
     const result = await getDetailsById(id);
     setMovieDetails(result);
     document.body.style.overflow = "hidden";
@@ -57,15 +61,19 @@ function App() {
       .indexOf(movieId);
 
     if (carrotDirection === "right") {
-      const results = await getDetailsById(
-        searchResult[currentMovieIndex + 1].id
-      );
+      const results =
+        currentMovieIndex === searchResult.length - 1
+          ? await getDetailsById(searchResult[0].id)
+          : await getDetailsById(searchResult[currentMovieIndex + 1].id);
+
       setMovieDetails(results);
       setDidClickCarrot(true);
     } else if (carrotDirection === "left") {
-      const results = await getDetailsById(
-        searchResult[currentMovieIndex - 1].id
-      );
+      const results =
+        currentMovieIndex === 0
+          ? await getDetailsById(searchResult[searchResult.length - 1].id)
+          : await getDetailsById(searchResult[currentMovieIndex - 1].id);
+
       setMovieDetails(results);
       setDidClickCarrot(true);
     }
@@ -175,6 +183,7 @@ function App() {
               movieDetails={movieDetails}
               handleDetailCardClick={handleDetailCardClick}
               handleCarrotClick={handleCarrotClick}
+              credits={credits}
             />
           )}
         </div>
