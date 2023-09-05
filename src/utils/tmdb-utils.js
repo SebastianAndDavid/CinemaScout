@@ -37,4 +37,20 @@ async function getDetailsById(id) {
   return results;
 }
 
-export { getMovieBySearch, getMovieById, getDiscover, getDetailsById };
+async function getCreditsById(id) {
+  const results = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=46db8a5c2f862f015781b602a58bdd9d`
+  );
+
+  const { cast } = await results.json();
+  console.log("results", cast);
+  return cast;
+}
+
+export {
+  getMovieBySearch,
+  getMovieById,
+  getDiscover,
+  getDetailsById,
+  getCreditsById,
+};

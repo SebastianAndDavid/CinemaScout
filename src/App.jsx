@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  getCreditsById,
   getDetailsById,
   getDiscover,
   getMovieBySearch,
@@ -45,6 +46,7 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
+    await getCreditsById(9988);
     const result = await getDetailsById(id);
     setMovieDetails(result);
     document.body.style.overflow = "hidden";
