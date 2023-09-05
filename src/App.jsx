@@ -28,7 +28,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
-  const [cast, setCast] = useState([]);
+  const [credits, setCredits] = useState([]);
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -47,8 +47,8 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
-    const castResult = await getCreditsById(id);
-    setCast(castResult);
+    const creditResult = await getCreditsById(id);
+    setCredits(creditResult);
     const result = await getDetailsById(id);
     setMovieDetails(result);
     document.body.style.overflow = "hidden";
@@ -61,23 +61,19 @@ function App() {
       .indexOf(movieId);
 
     if (carrotDirection === "right") {
-      const results = await getDetailsById(
-        searchResult[currentMovieIndex + 1].id
-      );
-      const castResult = await getCreditsById(
-        searchResult[currentMovieIndex + 1].id
-      );
-      setCast(castResult);
+      const results =
+        currentMovieIndex === searchResult.length - 1
+          ? await getDetailsById(searchResult[0].id)
+          : await getDetailsById(searchResult[currentMovieIndex + 1].id);
+
       setMovieDetails(results);
       setDidClickCarrot(true);
     } else if (carrotDirection === "left") {
-      const results = await getDetailsById(
-        searchResult[currentMovieIndex - 1].id
-      );
-      const castResult = await getCreditsById(
-        searchResult[currentMovieIndex + 1].id
-      );
-      setCast(castResult);
+      const results =
+        currentMovieIndex === 0
+          ? await getDetailsById(searchResult[searchResult.length - 1].id)
+          : await getDetailsById(searchResult[currentMovieIndex - 1].id);
+
       setMovieDetails(results);
       setDidClickCarrot(true);
     }
@@ -187,7 +183,7 @@ function App() {
               movieDetails={movieDetails}
               handleDetailCardClick={handleDetailCardClick}
               handleCarrotClick={handleCarrotClick}
-              cast={cast}
+              credits={credits}
             />
           )}
         </div>

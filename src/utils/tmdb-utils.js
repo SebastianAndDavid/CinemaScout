@@ -38,12 +38,12 @@ async function getDetailsById(id) {
 }
 
 async function getCreditsById(id) {
-  const results = await fetch(
+  const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=46db8a5c2f862f015781b602a58bdd9d`
   );
 
-  const { cast } = await results.json();
-  return cast;
+  const results = await response.json();
+  return results;
 }
 
 export {
