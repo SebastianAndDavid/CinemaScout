@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getDetailsById, getMovieBySearch } from "./utils/tmdb-utils";
+import {
+  getDetailsById,
+  getDiscover,
+  getMovieBySearch,
+} from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
@@ -8,11 +12,9 @@ import DetailCard from "./components/DetailCard";
 function App() {
   const [genreClick, setGenreClick] = useState([]);
   const [persistentGenreClick, setPersistentGenreClick] = useState([]);
-  console.log("persistentGenreClick", persistentGenreClick);
   const [releaseDateValue, setReleaseDateValue] = useState("");
   const [persistentReleaseDateValue, setPersistentReleaseDateValue] =
     useState("");
-  console.log("persistentReleaseDateValue", persistentReleaseDateValue);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [movieDetails, setMovieDetails] = useState({});
@@ -24,11 +26,21 @@ function App() {
   const [didClickDiscover, setDidClickDiscover] = useState(false);
   const [page, setPage] = useState(1);
   const [persistentSearch, setPersistentSearch] = useState("");
+  const [inputToggle, setInputToggle] = useState(false);
 
-  // res will be ternery for either getMovieBySearch or getDiscover
   async function handleSeeMoreResultsClick() {
-    const res = await getMovieBySearch(persistentSearch, page + 1);
-    setSearchResult([...searchResult, ...res]);
+    if (!inputToggle) {
+      const res = await getMovieBySearch(persistentSearch, page + 1);
+      setSearchResult([...searchResult, ...res]);
+    } else {
+      const { results } = await getDiscover(
+        persistentReleaseDateValue,
+        persistentGenreClick,
+        page + 1
+      );
+      setSearchResult([...searchResult, ...results]);
+    }
+
     setPage(page + 1);
   }
 
@@ -72,7 +84,8 @@ function App() {
   function handleMouseLeave() {
     setIsHover(false);
   }
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     const result = await getMovieBySearch(search);
     setSearchResult(result);
     setPersistentSearch(search);
@@ -93,9 +106,9 @@ function App() {
             <h1>Hello from TMDB-Search-Display</h1>
             {!isChecked && (
               <Inputs
-                // persistentGenreClick={persistentGenreClick}
+                inputToggle={inputToggle}
+                setInputToggle={setInputToggle}
                 setPersistentGenreClick={setPersistentGenreClick}
-                // persistentReleaseDateValue={PersistentReleaseDateValue}
                 setPersistentReleaseDateValue={setPersistentReleaseDateValue}
                 releaseDateValue={releaseDateValue}
                 setReleaseDateValue={setReleaseDateValue}

@@ -23,7 +23,7 @@ async function getDiscover(year, genres, page = 1) {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?page=1&primary_release_year=${year}&with_genres=${genres}&api_key=${API_KEY}&page=${page}`
   );
-
+  // Trace steps to be able to destructure {results}
   const results = await response.json();
   return results;
 }
