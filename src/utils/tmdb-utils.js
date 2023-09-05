@@ -43,7 +43,6 @@ async function getCreditsById(id) {
   );
 
   const { cast } = await results.json();
-  console.log("results", cast);
   return cast;
 }
 

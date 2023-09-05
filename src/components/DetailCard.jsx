@@ -8,8 +8,6 @@ export default function DetailCard({
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
-  console.log("movieDetails", movieDetails);
-
   return (
     <div className="detail-card">
       <div className="carrot-container-1">
@@ -40,10 +38,10 @@ export default function DetailCard({
             <p>Quentin</p>
           </div>
           <div className="actor-list">
-            <p>{cast[0].name}</p>
-            <p>Amy Smith</p>
-            <p>Bill Hader</p>
-            <p>Hill Bader</p>
+            {cast[0].name && <p>{cast[0].name}</p>}
+            {cast[1] && <p>{cast[1].name}</p>}
+            {cast[2] && <p>{cast[2].name}</p>}
+            {cast[3] && <p>{cast[3].name}</p>}
           </div>
         </div>
       </div>
