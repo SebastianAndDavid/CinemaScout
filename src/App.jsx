@@ -77,7 +77,11 @@ function App() {
         currentMovieIndex === 0
           ? await getDetailsById(searchResult[searchResult.length - 1].id)
           : await getDetailsById(searchResult[currentMovieIndex - 1].id);
-
+      const creditResult =
+        currentMovieIndex === 0
+          ? await getCreditsById(searchResult[searchResult.length - 1].id)
+          : await getCreditsById(searchResult[currentMovieIndex - 1].id);
+      setCredits(creditResult);
       setMovieDetails(results);
       setDidClickCarrot(true);
     }
