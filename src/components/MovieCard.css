@@ -36,16 +36,52 @@
   align-items: flex-end;
   height: 424.95px;
   margin: 0px 75px 0px 75px;
+  cursor: pointer;
 }
 
 /* Header */
 
 header {
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: rgb(255, 248, 220);
 }
 
 /* Inputs */
+
+.search-container form {
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.search-container button {
+  border: none;
+  outline: none;
+  background-color: white;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.search-container img {
+  cursor: pointer;
+  height: 1lh;
+}
+
+.inputs-container {
+  display: flex;
+  justify-content: center;
+  margin: 5vh;
+}
 
 .discover-container {
   display: flex;

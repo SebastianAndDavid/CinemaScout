@@ -108,6 +108,7 @@ function App() {
     setSearch("");
     setPage(1);
     setDidClickMovieCard(false);
+    console.log("clicking");
   }
 
   useEffect(() => {
@@ -118,8 +119,7 @@ function App() {
     <>
       <div className="parent">
         {!didClickMovieCard && (
-          <div className="header">
-            <h1>Hello from TMDB-Search-Display</h1>
+          <header className="header">
             {!isChecked && (
               <Inputs
                 inputToggle={inputToggle}
@@ -139,7 +139,7 @@ function App() {
                 setDidClickDiscover={setDidClickDiscover}
               />
             )}
-          </div>
+          </header>
         )}
         <div
           className={

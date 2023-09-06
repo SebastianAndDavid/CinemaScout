@@ -75,7 +75,7 @@ export default function Inputs({
                 onChange={(e) => setSearch(e.target.value)}
               />
               <button type="submit" onClick={(e) => handleSubmit(e)}>
-                Submit
+                <img src="search.svg" />
               </button>
             </form>
           </div>
