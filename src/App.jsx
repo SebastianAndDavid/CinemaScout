@@ -65,7 +65,11 @@ function App() {
         currentMovieIndex === searchResult.length - 1
           ? await getDetailsById(searchResult[0].id)
           : await getDetailsById(searchResult[currentMovieIndex + 1].id);
-
+      const creditResult =
+        currentMovieIndex === searchResult.length - 1
+          ? await getCreditsById(searchResult[0].id)
+          : await getCreditsById(searchResult[currentMovieIndex + 1].id);
+      setCredits(creditResult);
       setMovieDetails(results);
       setDidClickCarrot(true);
     } else if (carrotDirection === "left") {
