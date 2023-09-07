@@ -18,6 +18,11 @@
 .movie-card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.movie-card-container h4 {
+  max-width: 424.95px;
 }
 
 .movie-card-container .movie-card {
@@ -36,20 +41,109 @@
   align-items: flex-end;
   height: 424.95px;
   margin: 0px 75px 0px 75px;
+  cursor: pointer;
 }
 
 /* Header */
 
 header {
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: rgb(255, 248, 220);
 }
 
 /* Inputs */
 
+.toggle-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #fff8dc;
+  font-size: 25px;
+  position: relative;
+  bottom: 3.5px;
+}
+
+.search-container form {
+  display: flex;
+  justify-content: center;
+}
+
+.release-date-container form {
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  width: 300px;
+  height: 30px;
+}
+
+.release-date-container input {
+  border: none;
+  outline: none;
+  border: 1px solid black;
+  width: 300px;
+  height: 30px;
+  margin-right: 20px;
+}
+
+.release-date-container button {
+  border: none;
+  outline: none;
+  background-color: white;
+  border: 1px solid black;
+  width: 50px;
+}
+
+.release-date-container button:hover {
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 3px 3px 2px 0px;
+  background: rgb(228, 214, 160);
+  background: linear-gradient(
+    90deg,
+    rgba(228, 214, 160, 1) 35%,
+    rgba(227, 209, 140, 1) 62%
+  );
+}
+
+.search-container button {
+  border: none;
+  outline: none;
+  background-color: white;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.search-container img {
+  height: 1lh;
+}
+
+.release-date-container img {
+  cursor: pointer;
+  height: 1lh;
+}
+
+.inputs-container {
+  display: flex;
+  justify-content: center;
+  margin: 3vh;
+}
+
 .discover-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 a {
@@ -70,19 +164,6 @@ label {
   align-items: flex-start;
 
   width: 6vw;
-}
-
-.release-date-container {
-  display: flex;
-  align-items: center;
-}
-
-.release-date-container input {
-  height: 3vh;
-}
-
-.release-date-container button {
-  height: 4vh;
 }
 
 /* Detail Component */
