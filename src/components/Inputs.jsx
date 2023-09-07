@@ -55,6 +55,10 @@ export default function Inputs({
       setReleaseDateValue("");
       setGenreClick([]);
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   return (
