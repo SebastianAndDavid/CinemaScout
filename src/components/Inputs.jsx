@@ -120,6 +120,14 @@ export default function Inputs({
                 />
                 Action
               </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={"12"}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                Adventure
+              </label>
               {seeMoreClick &&
                 genreArray.map((genre, i) => {
                   return (

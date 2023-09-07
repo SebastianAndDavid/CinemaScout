@@ -117,10 +117,10 @@ header {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   padding-left: 30px;
+  cursor: pointer;
 }
 
 .search-container img {
-  cursor: pointer;
   height: 1lh;
 }
 
