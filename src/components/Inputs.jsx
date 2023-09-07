@@ -65,9 +65,19 @@ export default function Inputs({
     <div className="inputs-container">
       <>
         {!inputToggle ? (
-          <button onClick={() => setInputToggle(true)}>See Discover</button>
+          <button
+            className="toggle-button"
+            onClick={() => setInputToggle(true)}
+          >
+            🔮
+          </button>
         ) : (
-          <button onClick={() => setInputToggle(false)}>See Search</button>
+          <button
+            className="toggle-button"
+            onClick={() => setInputToggle(false)}
+          >
+            🔍
+          </button>
         )}
         {!inputToggle ? (
           <div className="search-container">
@@ -138,7 +148,9 @@ export default function Inputs({
                   type="number"
                   onChange={(e) => setReleaseDateValue(e.target.value)}
                 />
-                <button onClick={(e) => handleDiscover(e)}>Discover</button>
+                <button onClick={(e) => handleDiscover(e)}>
+                  <img src="globe.svg" />
+                </button>
               </form>
             </div>
           </div>
