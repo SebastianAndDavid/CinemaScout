@@ -19,7 +19,14 @@ export default function DetailCard({
         ></a>
       </div>
       <div className="detail-image">
-        <img src={BASE_POSTER_URL + movieDetails.poster_path} />
+        {movieDetails.poster_path ? (
+          <img
+            style={{ width: "240px", height: "360px" }}
+            src={BASE_POSTER_URL + movieDetails.poster_path}
+          />
+        ) : (
+          <img style={{ width: "240px", height: "360px" }} src="niccage.jpg" />
+        )}
       </div>
       <div className="detail-text">
         <h3>{movieDetails.title}</h3>

@@ -17,10 +17,14 @@ export default function MovieCard({
         onMouseEnter={() => handleMouseEnter(movieObject.id)}
         onMouseLeave={() => handleMouseLeave()}
       >
-        <img
-          style={{ width: "240px", height: "360px" }}
-          src={BASE_POSTER_URL + movieObject.poster_path}
-        />
+        {movieObject.poster_path ? (
+          <img
+            style={{ width: "240px", height: "360px" }}
+            src={BASE_POSTER_URL + movieObject.poster_path}
+          />
+        ) : (
+          <img style={{ width: "240px", height: "360px" }} src="niccage.jpg" />
+        )}
       </div>
     </>
   );
