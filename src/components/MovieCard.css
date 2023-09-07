@@ -18,6 +18,11 @@
 .movie-card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.movie-card-container h4 {
+  max-width: 424.95px;
 }
 
 .movie-card-container .movie-card {
