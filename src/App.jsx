@@ -151,8 +151,9 @@ function App() {
           </header>
         )}
         {splashPage && (
-          <div>
-            <h1>Hello This is Not really what were going without conditions</h1>
+          <div className="splash-page">
+            {/* <h2>Welcome to Nick Cage&apos;s Movie Library </h2> */}
+            <img src="bunnycage.jpg" />
           </div>
         )}
         <div
