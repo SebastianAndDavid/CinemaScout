@@ -68,6 +68,7 @@ export default function Inputs({
           <button
             className="toggle-button"
             onClick={() => setInputToggle(true)}
+            title="Click to discover"
           >
             🔮
           </button>
@@ -75,6 +76,7 @@ export default function Inputs({
           <button
             className="toggle-button"
             onClick={() => setInputToggle(false)}
+            title="Click to search"
           >
             🔍
           </button>
