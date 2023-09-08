@@ -29,6 +29,7 @@ function App() {
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
   const [credits, setCredits] = useState([]);
+  const [splashPage, setSplashPage] = useState(true);
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -108,6 +109,7 @@ function App() {
     setSearch("");
     setPage(1);
     setDidClickMovieCard(false);
+    setSplashPage(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -118,6 +120,9 @@ function App() {
     setIsChecked(false);
   }, [searchResult]);
 
+  console.log("splashPage", splashPage);
+
+  console.log("searchResult", searchResult);
   return (
     <>
       <div className="parent">
@@ -140,9 +145,15 @@ function App() {
                 setSearchResult={setSearchResult}
                 setIsChecked={setIsChecked}
                 setDidClickDiscover={setDidClickDiscover}
+                setSplashPage={setSplashPage}
               />
             )}
           </header>
+        )}
+        {splashPage && (
+          <div>
+            <h1>Hello This is Not really what were going without conditions</h1>
+          </div>
         )}
         <div
           className={
