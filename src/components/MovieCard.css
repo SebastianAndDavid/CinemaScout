@@ -64,6 +64,11 @@ header {
   top: 0;
   z-index: 2;
   background-color: rgb(255, 248, 220);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 220, 1) 71%,
+    rgba(241, 232, 189, 1) 100%
+  );
 }
 
 /* Inputs */
