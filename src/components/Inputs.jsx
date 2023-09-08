@@ -55,15 +55,29 @@ export default function Inputs({
       setReleaseDateValue("");
       setGenreClick([]);
     }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   return (
     <div className="inputs-container">
       <>
         {!inputToggle ? (
-          <button onClick={() => setInputToggle(true)}>See Discover</button>
+          <button
+            className="toggle-button"
+            onClick={() => setInputToggle(true)}
+          >
+            🔮
+          </button>
         ) : (
-          <button onClick={() => setInputToggle(false)}>See Search</button>
+          <button
+            className="toggle-button"
+            onClick={() => setInputToggle(false)}
+          >
+            🔍
+          </button>
         )}
         {!inputToggle ? (
           <div className="search-container">
@@ -106,6 +120,14 @@ export default function Inputs({
                 />
                 Action
               </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={"12"}
+                  onClick={(e) => handleGenreClick(e)}
+                />
+                Adventure
+              </label>
               {seeMoreClick &&
                 genreArray.map((genre, i) => {
                   return (
@@ -134,7 +156,9 @@ export default function Inputs({
                   type="number"
                   onChange={(e) => setReleaseDateValue(e.target.value)}
                 />
-                <button onClick={(e) => handleDiscover(e)}>Discover</button>
+                <button onClick={(e) => handleDiscover(e)}>
+                  <img src="globe.svg" />
+                </button>
               </form>
             </div>
           </div>

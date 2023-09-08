@@ -108,7 +108,10 @@ function App() {
     setSearch("");
     setPage(1);
     setDidClickMovieCard(false);
-    console.log("clicking");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   useEffect(() => {
