@@ -59,7 +59,7 @@
 
 /* Header */
 
-header {
+.header {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -69,6 +69,13 @@ header {
     rgba(255, 248, 220, 1) 71%,
     rgba(241, 232, 189, 1) 100%
   );
+}
+
+.splash-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: cornsilk;
 }
 
 /* Inputs */

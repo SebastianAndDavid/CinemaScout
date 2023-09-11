@@ -127,7 +127,7 @@ function App() {
     <>
       <div className="parent">
         {!didClickMovieCard && (
-          <header className="header">
+          <header className={splashPage ? "splash-header" : "header"}>
             {!isChecked && (
               <Inputs
                 inputToggle={inputToggle}
