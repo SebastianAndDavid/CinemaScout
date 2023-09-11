@@ -120,9 +120,6 @@ function App() {
     setIsChecked(false);
   }, [searchResult]);
 
-  console.log("splashPage", splashPage);
-
-  console.log("searchResult", searchResult);
   return (
     <>
       <div className="parent">

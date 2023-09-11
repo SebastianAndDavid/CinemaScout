@@ -7,9 +7,11 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: #dfd5a4;
+  /* background-color: #dfd5a4; */
+  background: #fff8dc;
+  background: linear-gradient(180deg, #fff8dc 5%, #dfd5a4 30%, #fff8dc 90%);
 }
 
-/* :root {
+:root {
   font-family: "Nunito", sans-serif;
-} */
+}
