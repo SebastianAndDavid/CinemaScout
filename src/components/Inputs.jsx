@@ -19,6 +19,7 @@ export default function Inputs({
   setPersistentReleaseDateValue,
   inputToggle,
   setInputToggle,
+  setSplashPage,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
 
@@ -54,6 +55,7 @@ export default function Inputs({
       setDidClickDiscover(true);
       setReleaseDateValue("");
       setGenreClick([]);
+      setSplashPage(false);
     }
     window.scrollTo({
       top: 0,
@@ -185,5 +187,6 @@ Inputs.propTypes = {
   setPersistentGenreClick: PropTypes.func.isRequired,
   setPersistentReleaseDateValue: PropTypes.func.isRequired,
   setReleaseDateValue: PropTypes.func.isRequired,
+  setSplashPage: PropTypes.func.isRequired,
   genreClick: PropTypes.array.isRequired,
 };

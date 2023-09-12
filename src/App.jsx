@@ -29,6 +29,7 @@ function App() {
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
   const [credits, setCredits] = useState([]);
+  const [splashPage, setSplashPage] = useState(true);
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -108,6 +109,7 @@ function App() {
     setSearch("");
     setPage(1);
     setDidClickMovieCard(false);
+    setSplashPage(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -118,11 +120,14 @@ function App() {
     setIsChecked(false);
   }, [searchResult]);
 
+  console.log("splashPage", splashPage);
+
+  console.log("searchResult", searchResult);
   return (
     <>
       <div className="parent">
         {!didClickMovieCard && (
-          <header className="header">
+          <header className={splashPage ? "splash-header" : "header"}>
             {!isChecked && (
               <Inputs
                 inputToggle={inputToggle}
@@ -140,9 +145,16 @@ function App() {
                 setSearchResult={setSearchResult}
                 setIsChecked={setIsChecked}
                 setDidClickDiscover={setDidClickDiscover}
+                setSplashPage={setSplashPage}
               />
             )}
           </header>
+        )}
+        {splashPage && (
+          <div className="splash-page">
+            {/* <h2>Welcome to Nick Cage&apos;s Movie Library </h2> */}
+            <img src="bunnycage.jpg" />
+          </div>
         )}
         <div
           className={
