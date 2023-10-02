@@ -62,7 +62,7 @@ function App() {
       document.body.style.overflow = "hidden";
       setDidClickMovieCard(true);
     } else {
-      const tvResult = await getTVShowDetailsById();
+      const tvResult = await getTVShowDetailsById(id);
       setTVShowDetails(tvResult);
       document.body.style.overflow = "hidden";
       setDidClickTVShowCard(true);
@@ -103,7 +103,11 @@ function App() {
 
   function handleDetailCardClick() {
     document.body.style.overflow = "";
-    setDidClickMovieCard(false);
+    if (didClickMovieCard) {
+      setDidClickMovieCard(false);
+    } else if (didClickTVShowCard) {
+      setDidClickTVShowCard(false);
+    }
     setDidClickCarrot(false);
   }
 
@@ -239,7 +243,10 @@ function App() {
             />
           )}
           {didClickTVShowCard && (
-            <TVShowDetailCard TVShowDetails={TVShowDetails} />
+            <TVShowDetailCard
+              TVShowDetails={TVShowDetails}
+              handleDetailCardClick={handleDetailCardClick}
+            />
           )}
         </div>
         {searchResult.length % 20 === 0 && searchResult.length !== 0 && (
