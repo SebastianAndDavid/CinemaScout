@@ -4,6 +4,7 @@ import {
   getDetailsById,
   getDiscover,
   getMovieBySearch,
+  getSeriesBySearch,
 } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
@@ -30,6 +31,8 @@ function App() {
   const [inputToggle, setInputToggle] = useState(false);
   const [credits, setCredits] = useState([]);
   const [splashPage, setSplashPage] = useState(true);
+
+  getSeriesBySearch();
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {

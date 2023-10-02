@@ -233,9 +233,13 @@ label {
   flex-direction: column;
 }
 
-.actor-list {
+.cast {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.actors {
+  display: flex;
 }
 
 .detail-image img {

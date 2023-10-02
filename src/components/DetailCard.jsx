@@ -44,14 +44,19 @@ export default function DetailCard({
         <p>{movieDetails.overview}</p>
         <div className="credits">
           <div className="director">
+            Director
             {director[0] && <p>{director[0].name}</p>}
             {director[1] && <p>{director[1].name}</p>}
           </div>
-          <div className="actor-list">
+          <div className="cast">
+            Cast
+            <div className="actors">
+
             {credits.cast[0] && <p>{credits.cast[0].name}</p>}
             {credits.cast[1] && <p>{credits.cast[1].name}</p>}
             {credits.cast[2] && <p>{credits.cast[2].name}</p>}
             {credits.cast[3] && <p>{credits.cast[3].name}</p>}
+            </div>
           </div>
         </div>
       </div>
