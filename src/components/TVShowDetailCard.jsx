@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 export default function TVShowDetailCard({
   TVShowDetails,
   handleDetailCardClick,
+  credits,
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
-  console.log("TVShowDetails", TVShowDetails);
 
   return (
     <div className="detail-card">
-      <div className="carrot-container-1"></div>
+      <div className="carrot-container-1">
+        <a className="carrot-1"></a>
+      </div>
       <div className="detail-image">
         {TVShowDetails.poster_path ? (
           <img
@@ -33,8 +35,28 @@ export default function TVShowDetailCard({
           </a>
         )}
         <p>{TVShowDetails.overview}</p>
+        <div className="credits">
+          <div className="director">
+            {TVShowDetails.created_by[0] && <div>Created By: </div>}
+            {TVShowDetails.created_by[0] && (
+              <div>{TVShowDetails.created_by[0].name}</div>
+            )}
+            {TVShowDetails.created_by[1] && (
+              <div>{TVShowDetails.created_by[1].name}</div>
+            )}
+          </div>
+          {credits.cast[0] && <div>Cast:</div>}
+          <div className="actor-list">
+            {credits.cast[0] && <div>{credits.cast[0].name}</div>}
+            {credits.cast[1] && <div>{credits.cast[1].name}</div>}
+            {credits.cast[2] && <div>{credits.cast[2].name}</div>}
+            {credits.cast[3] && <div>{credits.cast[3].name}</div>}
+          </div>
+        </div>
       </div>
-      <div className="carrot-container-2"></div>
+      <div className="carrot-container-2">
+        <a className="carrot-2"></a>
+      </div>
       <div className="x-container">
         <div className="x-button" onClick={() => handleDetailCardClick()}>
           &times;
@@ -45,5 +67,6 @@ export default function TVShowDetailCard({
 }
 TVShowDetailCard.propTypes = {
   TVShowDetails: PropTypes.object.isRequired,
+  credits: PropTypes.object.isRequired,
   handleDetailCardClick: PropTypes.func.isRequired,
 };

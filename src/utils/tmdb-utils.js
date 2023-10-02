@@ -62,6 +62,16 @@ async function getTVShowDetailsById(id) {
   return results;
 }
 
+async function getTVShowCreditsById() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/tv/2317/credits?language=en-US&api_key=46db8a5c2f862f015781b602a58bdd9d`
+  );
+
+  const results = await response.json();
+  console.log("results", results);
+  return results;
+}
+
 export {
   getMovieBySearch,
   getMovieById,
@@ -70,4 +80,5 @@ export {
   getCreditsById,
   getTVShowBySearch,
   getTVShowDetailsById,
+  getTVShowCreditsById,
 };

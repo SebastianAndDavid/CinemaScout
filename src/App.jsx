@@ -5,6 +5,7 @@ import {
   getDiscover,
   getMovieBySearch,
   getTVShowBySearch,
+  getTVShowCreditsById,
   getTVShowDetailsById,
 } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
@@ -62,6 +63,8 @@ function App() {
       document.body.style.overflow = "hidden";
       setDidClickMovieCard(true);
     } else {
+      const tvCreditResult = await getTVShowCreditsById(id);
+      setCredits(tvCreditResult);
       const tvResult = await getTVShowDetailsById(id);
       setTVShowDetails(tvResult);
       document.body.style.overflow = "hidden";
@@ -69,10 +72,8 @@ function App() {
     }
   }
 
-  async function handleCarrotClick(movieId, carrotDirection) {
-    const currentMovieIndex = searchResult
-      .map((movie) => movie.id)
-      .indexOf(movieId);
+  async function handleCarrotClick(id, carrotDirection) {
+    const currentMovieIndex = searchResult.map((movie) => movie.id).indexOf(id);
 
     if (carrotDirection === "right") {
       const results =
@@ -246,6 +247,7 @@ function App() {
             <TVShowDetailCard
               TVShowDetails={TVShowDetails}
               handleDetailCardClick={handleDetailCardClick}
+              credits={credits}
             />
           )}
         </div>
