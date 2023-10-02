@@ -20,6 +20,7 @@ export default function Inputs({
   inputToggle,
   setInputToggle,
   setSplashPage,
+  handleTVSearchSubmit,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
   const [searchOptionValue, setSearchOptionValue] = useState("");
@@ -64,8 +65,6 @@ export default function Inputs({
     });
   }
 
-  console.log("searchOptionValue", searchOptionValue);
-
   return (
     <div className="inputs-container">
       <>
@@ -99,9 +98,15 @@ export default function Inputs({
                 type="text"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button type="submit" onClick={(e) => handleSubmit(e)}>
-                <img src="search.svg" />
-              </button>
+              {searchOptionValue === "Movies" ? (
+                <button type="submit" onClick={(e) => handleSubmit(e)}>
+                  <img src="search.svg" />
+                </button>
+              ) : (
+                <button type="submit" onClick={(e) => handleTVSearchSubmit(e)}>
+                  <img src="search.svg" />
+                </button>
+              )}
             </form>
           </div>
         ) : (
@@ -189,6 +194,7 @@ Inputs.propTypes = {
   setDidClickDiscover: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleTVSearchSubmit: PropTypes.func.isRequired,
   setDidClickMovieCard: PropTypes.func.isRequired,
   setGenreClick: PropTypes.func.isRequired,
   setPersistentGenreClick: PropTypes.func.isRequired,

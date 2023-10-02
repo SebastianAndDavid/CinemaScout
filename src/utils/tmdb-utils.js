@@ -46,10 +46,19 @@ async function getCreditsById(id) {
   return results;
 }
 
+async function getTVShowBySearch() {
+  const response = await fetch(
+    "https://api.themoviedb.org/3/search/tv?query=star%20trek&include_adult=false&language=en-US&page=1&api_key=46db8a5c2f862f015781b602a58bdd9d"
+  );
+  const { results } = await response.json();
+  return results;
+}
+
 export {
   getMovieBySearch,
   getMovieById,
   getDiscover,
   getDetailsById,
   getCreditsById,
+  getTVShowBySearch,
 };

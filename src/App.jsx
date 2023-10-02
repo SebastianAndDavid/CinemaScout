@@ -4,6 +4,7 @@ import {
   getDetailsById,
   getDiscover,
   getMovieBySearch,
+  getTVShowBySearch,
 } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
@@ -98,9 +99,11 @@ function App() {
     setIsHover(true);
     setMovieId(movieId);
   }
+
   function handleMouseLeave() {
     setIsHover(false);
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const result = await getMovieBySearch(search);
@@ -114,6 +117,15 @@ function App() {
       top: 0,
       behavior: "smooth",
     });
+  }
+
+  async function handleTVSearchSubmit(e) {
+    e.preventDefault();
+    const result = await getTVShowBySearch(search);
+    setSearchResult(result);
+    setSearch("");
+    setDidClickMovieCard(false);
+    setSplashPage(false);
   }
 
   useEffect(() => {
@@ -139,6 +151,7 @@ function App() {
                 search={search}
                 setSearch={setSearch}
                 handleSubmit={handleSubmit}
+                handleTVSearchSubmit={handleTVSearchSubmit}
                 setSearchResult={setSearchResult}
                 setIsChecked={setIsChecked}
                 setDidClickDiscover={setDidClickDiscover}
