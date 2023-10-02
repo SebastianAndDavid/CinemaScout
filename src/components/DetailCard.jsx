@@ -13,8 +13,6 @@ export default function DetailCard({
   console.log("movieDetails", movieDetails);
 
   function renderVoteCount() {
-    // let stars;
-
     if (movieDetails.vote_average <= 1.9) {
       return <div>⭐️</div>;
     } else if (
@@ -59,6 +57,7 @@ export default function DetailCard({
       </div>
       <div className="detail-text">
         <h3>{movieDetails.title}</h3>
+        <div className="vote-average">{renderVoteCount()}</div>
         {movieDetails.tagline && <h4>{movieDetails.tagline}</h4>}
 
         <div className="releasedate-runtime">
@@ -85,7 +84,6 @@ export default function DetailCard({
             {credits.cast[2] && <div>{credits.cast[2].name}</div>}
             {credits.cast[3] && <div>{credits.cast[3].name}</div>}
           </div>
-          <div className="vote-average">{renderVoteCount()}</div>
         </div>
       </div>
       <div className="carrot-container-2">

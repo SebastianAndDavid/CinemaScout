@@ -65,22 +65,24 @@ header {
   top: 0;
   z-index: 2;
   background-color: rgb(255, 248, 220);
+}
+/* 
   border: 10px dotted red;
   animation-name: blinking;
   animation-duration: 1s;
   animation-iteration-count: 100;
-  /* background: linear-gradient(
+  background: linear-gradient(
     180deg,
     rgba(255, 248, 220, 1) 71%,
     rgba(241, 232, 189, 1) 100%
-  ); */
-}
+  );
+*/
 
-@keyframes blinking {
+/* @keyframes blinking {
   50% {
     border-color: #ffcd5f;
   }
-}
+} */
 
 /* Inputs */
 

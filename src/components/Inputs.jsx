@@ -22,6 +22,7 @@ export default function Inputs({
   setSplashPage,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
+  const [searchOptionValue, setSearchOptionValue] = useState("");
 
   function checkValue(array, value) {
     if (array.includes(value)) {
@@ -63,6 +64,8 @@ export default function Inputs({
     });
   }
 
+  console.log("searchOptionValue", searchOptionValue);
+
   return (
     <div className="inputs-container">
       <>
@@ -85,6 +88,10 @@ export default function Inputs({
         )}
         {!inputToggle ? (
           <div className="search-container">
+            <select onChange={(e) => setSearchOptionValue(e.target.value)}>
+              <option value="Movies">Movies</option>
+              <option value="TV-shows">TV shows</option>
+            </select>
             <form>
               <input
                 placeholder="Search"
