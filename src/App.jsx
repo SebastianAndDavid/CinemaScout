@@ -5,11 +5,13 @@ import {
   getDiscover,
   getMovieBySearch,
   getTVShowBySearch,
+  getTVShowDetailsById,
 } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
 import DetailCard from "./components/DetailCard";
+import TVShowDetailCard from "./components/TVShowDetailCard";
 
 function App() {
   const [genreClick, setGenreClick] = useState([]);
@@ -31,6 +33,9 @@ function App() {
   const [inputToggle, setInputToggle] = useState(false);
   const [credits, setCredits] = useState([]);
   const [splashPage, setSplashPage] = useState(true);
+  const [didClickHandleSubmit, setDidClickHandleSubmit] = useState(false);
+  const [didClickTVShowCard, setDidClickTVShowCard] = useState(false);
+  const [TVShowDetails, setTVShowDetails] = useState({});
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -49,12 +54,19 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
-    const creditResult = await getCreditsById(id);
-    setCredits(creditResult);
-    const result = await getDetailsById(id);
-    setMovieDetails(result);
-    document.body.style.overflow = "hidden";
-    setDidClickMovieCard(true);
+    if (didClickHandleSubmit) {
+      const creditResult = await getCreditsById(id);
+      setCredits(creditResult);
+      const result = await getDetailsById(id);
+      setMovieDetails(result);
+      document.body.style.overflow = "hidden";
+      setDidClickMovieCard(true);
+    } else {
+      const tvResult = await getTVShowDetailsById();
+      setTVShowDetails(tvResult);
+      document.body.style.overflow = "hidden";
+      setDidClickTVShowCard(true);
+    }
   }
 
   async function handleCarrotClick(movieId, carrotDirection) {
@@ -113,6 +125,7 @@ function App() {
     setPage(1);
     setDidClickMovieCard(false);
     setSplashPage(false);
+    setDidClickHandleSubmit(true);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -123,9 +136,15 @@ function App() {
     e.preventDefault();
     const result = await getTVShowBySearch(search);
     setSearchResult(result);
+    setPersistentSearch(search);
     setSearch("");
     setDidClickMovieCard(false);
     setSplashPage(false);
+    setDidClickHandleSubmit(false);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   useEffect(() => {
@@ -218,6 +237,9 @@ function App() {
               handleCarrotClick={handleCarrotClick}
               credits={credits}
             />
+          )}
+          {didClickTVShowCard && (
+            <TVShowDetailCard TVShowDetails={TVShowDetails} />
           )}
         </div>
         {searchResult.length % 20 === 0 && searchResult.length !== 0 && (

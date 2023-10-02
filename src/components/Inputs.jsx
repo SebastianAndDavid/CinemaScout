@@ -23,7 +23,7 @@ export default function Inputs({
   handleTVSearchSubmit,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
-  const [searchOptionValue, setSearchOptionValue] = useState("");
+  const [searchOptionValue, setSearchOptionValue] = useState("Movies");
 
   function checkValue(array, value) {
     if (array.includes(value)) {
@@ -64,7 +64,6 @@ export default function Inputs({
       behavior: "smooth",
     });
   }
-
   return (
     <div className="inputs-container">
       <>

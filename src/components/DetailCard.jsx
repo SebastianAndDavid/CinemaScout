@@ -10,8 +10,6 @@ export default function DetailCard({
 
   const director = credits.crew.filter((person) => person.job === "Director");
 
-  console.log("movieDetails", movieDetails);
-
   function renderVoteCount() {
     if (movieDetails.vote_average <= 1.9) {
       return <div>⭐️</div>;
