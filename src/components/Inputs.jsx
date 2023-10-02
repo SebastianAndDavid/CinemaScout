@@ -10,6 +10,7 @@ export default function Inputs({
   setSearchResult,
   setIsChecked,
   setDidClickDiscover,
+  setDidClickHandleSubmit,
   setDidClickMovieCard,
   setGenreClick,
   genreClick,
@@ -41,6 +42,7 @@ export default function Inputs({
 
   async function handleDiscover(e) {
     e.preventDefault();
+    setDidClickHandleSubmit(true);
     setDidClickMovieCard(false);
     if (
       (releaseDateValue != "") & (releaseDateValue < 1888) ||
@@ -191,6 +193,7 @@ Inputs.propTypes = {
   inputToggle: PropTypes.bool.isRequired,
   setInputToggle: PropTypes.func.isRequired,
   setDidClickDiscover: PropTypes.func.isRequired,
+  setDidClickHandleSubmit: PropTypes.func.isRequired,
   setIsChecked: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleTVSearchSubmit: PropTypes.func.isRequired,

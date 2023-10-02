@@ -4,13 +4,17 @@ export default function TVShowDetailCard({
   TVShowDetails,
   handleDetailCardClick,
   credits,
+  handleCarrotClick,
 }) {
   const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
   return (
     <div className="detail-card">
       <div className="carrot-container-1">
-        <a className="carrot-1"></a>
+        <a
+          className="carrot-1"
+          onClick={() => handleCarrotClick(TVShowDetails.id, "left")}
+        ></a>
       </div>
       <div className="detail-image">
         {TVShowDetails.poster_path ? (
@@ -55,7 +59,10 @@ export default function TVShowDetailCard({
         </div>
       </div>
       <div className="carrot-container-2">
-        <a className="carrot-2"></a>
+        <a
+          className="carrot-2"
+          onClick={() => handleCarrotClick(TVShowDetails.id, "right")}
+        ></a>
       </div>
       <div className="x-container">
         <div className="x-button" onClick={() => handleDetailCardClick()}>
@@ -69,4 +76,5 @@ TVShowDetailCard.propTypes = {
   TVShowDetails: PropTypes.object.isRequired,
   credits: PropTypes.object.isRequired,
   handleDetailCardClick: PropTypes.func.isRequired,
+  handleCarrotClick: PropTypes.func.isRequired,
 };
