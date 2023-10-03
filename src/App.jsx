@@ -41,8 +41,6 @@ function App() {
   const [didClickTVShowCard, setDidClickTVShowCard] = useState(false);
   const [TVShowDetails, setTVShowDetails] = useState({});
 
-  getSeriesBySearch();
-
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
       const res = await getMovieBySearch(persistentSearch, page + 1);
@@ -190,6 +188,8 @@ function App() {
     });
   }
 
+  console.log(movieId)
+
   useEffect(() => {
     setIsChecked(false);
   }, [searchResult]);
@@ -225,7 +225,6 @@ function App() {
         )}
         {splashPage && (
           <div className="splash-page">
-            {/* <h2>Welcome to Nick Cage&apos;s Movie Library </h2> */}
             <img src="bunnycage.jpg" />
           </div>
         )}
@@ -240,11 +239,17 @@ function App() {
             <p>Sorry, no results!</p>
           ) : (
             searchResult.map((movie, i) => {
+              console.log(movie)
               if (isHover & (movie.id === movieId)) {
                 return (
                   <>
                     <div className="movie-card-container">
-                      <h4>{movie.title}</h4>
+                      {
+                        movie.title ? 
+                        <h4>{movie.title}</h4>
+                        :
+                       <h4>{movie.name}</h4> 
+                      }
                       <MovieCard
                         handleMovieCardClick={handleMovieCardClick}
                         movieObject={movie}
