@@ -40,10 +40,15 @@ function App() {
   const [didClickHandleSubmit, setDidClickHandleSubmit] = useState(false);
   const [didClickTVShowCard, setDidClickTVShowCard] = useState(false);
   const [TVShowDetails, setTVShowDetails] = useState({});
+  const [searchOptionValue, setSearchOptionValue] = useState("movie");
+
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
-      const res = await getMovieBySearch(persistentSearch, page + 1);
+      if (didClickHandleSubmit) {}
+      const res = didClickHandleSubmit ? 
+      await getMovieBySearch(persistentSearch, page + 1)
+      : await getTVShowBySearch(persistentSearch, page + 1);
       setSearchResult([...searchResult, ...res]);
     } else {
       const { results } = await getDiscover(
@@ -179,6 +184,7 @@ function App() {
     setSearchResult(result);
     setPersistentSearch(search);
     setSearch("");
+    setPage(1)
     setDidClickTVShowCard(false);
     setSplashPage(false);
     setDidClickHandleSubmit(false);
@@ -217,13 +223,14 @@ function App() {
                 setDidClickDiscover={setDidClickDiscover}
                 setDidClickHandleSubmit={setDidClickHandleSubmit}
                 setSplashPage={setSplashPage}
+                searchOptionValue={searchOptionValue}
+                setSearchOptionValue={setSearchOptionValue}
               />
             )}
           </header>
         )}
         {splashPage && (
           <div className="splash-page">
-            {/* <h2>Welcome to Nick Cage&apos;s Movie Library </h2> */}
             <img src="bunnycage.jpg" />
           </div>
         )}
@@ -242,7 +249,12 @@ function App() {
                 return (
                   <>
                     <div className="movie-card-container">
-                      <h4>{movie.title}</h4>
+                      {
+                        movie.title ? 
+                        <h4>{movie.title}</h4>
+                        :
+                       <h4>{movie.name}</h4> 
+                      }
                       <MovieCard
                         handleMovieCardClick={handleMovieCardClick}
                         movieObject={movie}

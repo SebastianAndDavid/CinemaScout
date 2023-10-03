@@ -19,9 +19,9 @@ async function getMovieById() {
   return results;
 }
 
-async function getDiscover(year, genres, page = 1) {
+async function getDiscover(searchOptionValue, year, genres, page = 1) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?page=1&primary_release_year=${year}&with_genres=${genres}&api_key=${API_KEY}&page=${page}`
+    `https://api.themoviedb.org/3/discover/${searchOptionValue}?page=1&primary_release_year=${year}&with_genres=${genres}&api_key=${API_KEY}&page=${page}`
   );
   // Trace steps to be able to destructure {results}
   const results = await response.json();
@@ -46,9 +46,9 @@ async function getCreditsById(id) {
   return results;
 }
 
-async function getTVShowBySearch(search) {
+async function getTVShowBySearch(search, page = 1) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=en-US&page=1&api_key=46db8a5c2f862f015781b602a58bdd9d`
+    `https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=en-US&page=${page}&api_key=46db8a5c2f862f015781b602a58bdd9d`
   );
   const { results } = await response.json();
   return results;
