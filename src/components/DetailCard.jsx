@@ -10,6 +10,31 @@ export default function DetailCard({
 
   const director = credits.crew.filter((person) => person.job === "Director");
 
+  function renderVoteCount() {
+    if (movieDetails.vote_average <= 1.9) {
+      return <div>⭐️</div>;
+    } else if (
+      movieDetails.vote_average >= 2 &&
+      movieDetails.vote_average < 4
+    ) {
+      return <div>⭐️⭐️</div>;
+    } else if (
+      movieDetails.vote_average >= 4 &&
+      movieDetails.vote_average < 6
+    ) {
+      return <div>⭐️⭐️⭐️</div>;
+    } else if (
+      movieDetails.vote_average >= 6 &&
+      movieDetails.vote_average < 8
+    ) {
+      return <div>⭐️⭐️⭐️⭐️</div>;
+    } else if (
+      movieDetails.vote_average >= 8 &&
+      movieDetails.vote_average <= 10
+    ) {
+      return <div>⭐️⭐️⭐️⭐️⭐️</div>;
+    }
+  }
   return (
     <div className="detail-card">
       <div className="carrot-container-1">
@@ -30,6 +55,7 @@ export default function DetailCard({
       </div>
       <div className="detail-text">
         <h3>{movieDetails.title}</h3>
+        <div className="vote-average">{renderVoteCount()}</div>
         {movieDetails.tagline && <h4>{movieDetails.tagline}</h4>}
 
         <div className="releasedate-runtime">
@@ -44,19 +70,17 @@ export default function DetailCard({
         <p>{movieDetails.overview}</p>
         <div className="credits">
           <div className="director">
-            Director
-            {director[0] && <p>{director[0].name}</p>}
-            {director[1] && <p>{director[1].name}</p>}
+            {director[0] && <div>Director:</div>}
+            {director[0] && <div>{director[0].name}</div>}
+            {director[1] && <div>{director[1].name}</div>}
           </div>
-          <div className="cast">
-            Cast
-            <div className="actors">
-
-            {credits.cast[0] && <p>{credits.cast[0].name}</p>}
-            {credits.cast[1] && <p>{credits.cast[1].name}</p>}
-            {credits.cast[2] && <p>{credits.cast[2].name}</p>}
-            {credits.cast[3] && <p>{credits.cast[3].name}</p>}
-            </div>
+          <br></br>
+          {credits.cast[0] && <div>Cast:</div>}
+          <div className="actor-list">
+            {credits.cast[0] && <div>{credits.cast[0].name}</div>}
+            {credits.cast[1] && <div>{credits.cast[1].name}</div>}
+            {credits.cast[2] && <div>{credits.cast[2].name}</div>}
+            {credits.cast[3] && <div>{credits.cast[3].name}</div>}
           </div>
         </div>
       </div>
