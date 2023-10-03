@@ -28,15 +28,6 @@ async function getDiscover(searchOptionValue, year, genres, page = 1) {
   return results;
 }
 
-// async function getDiscover(year, genres, page = 1, searchOptionValue) {
-//   const response = await fetch(
-//     `https://api.themoviedb.org/3/discover/tv?page=1&primary_release_year&with_genres&api_key=46db8a5c2f862f015781b602a58bdd9d&page=1`
-//   );
-//   // Trace steps to be able to destructure {results}
-//   const results = await response.json();
-//   return results;
-// }
-
 async function getDetailsById(id) {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=46db8a5c2f862f015781b602a58bdd9d`

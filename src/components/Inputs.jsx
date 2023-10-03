@@ -26,8 +26,6 @@ export default function Inputs({
   setSearchOptionValue
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
-  // const [searchOptionValue, setSearchOptionValue] = useState("Movies");
-console.log(searchOptionValue)
   function checkValue(array, value) {
     if (array.includes(value)) {
       const updatedArray = array.filter((item) => item !== value);
@@ -44,7 +42,11 @@ console.log(searchOptionValue)
 
   async function handleDiscover(e) {
     e.preventDefault();
-    setDidClickHandleSubmit(true);
+    if (searchOptionValue == 'movie') {
+      setDidClickHandleSubmit(true);
+    } else {
+      setDidClickHandleSubmit(false);
+    }
     setDidClickMovieCard(false);
     if (
       (releaseDateValue != "") & (releaseDateValue < 1888) ||
