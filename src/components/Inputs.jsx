@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { genreArray } from "../utils/genres";
+import { genreArray, tvGenreArray } from "../utils/genres";
 import { getDiscover } from "../utils/tmdb-utils";
 
 export default function Inputs({
@@ -23,7 +23,7 @@ export default function Inputs({
   setSplashPage,
   handleTVSearchSubmit,
   searchOptionValue,
-  setSearchOptionValue
+  setSearchOptionValue,
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
   function checkValue(array, value) {
@@ -42,7 +42,7 @@ export default function Inputs({
 
   async function handleDiscover(e) {
     e.preventDefault();
-    if (searchOptionValue == 'movie') {
+    if (searchOptionValue == "movie") {
       setDidClickHandleSubmit(true);
     } else {
       setDidClickHandleSubmit(false);
@@ -55,8 +55,12 @@ export default function Inputs({
       return alert("Please enter a valid date between 1888 and present");
     } else {
       const genres = genreClick.join();
-      const { results } = await getDiscover(searchOptionValue, releaseDateValue, genres);
-      console.log(results)
+      const { results } = await getDiscover(
+        searchOptionValue,
+        releaseDateValue,
+        genres
+      );
+      console.log(results);
       setSearchResult(results);
       setPersistentGenreClick(genreClick);
       setPersistentReleaseDateValue(releaseDateValue);
@@ -134,24 +138,61 @@ export default function Inputs({
                 />
                 Drama
               </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value={"28"}
-                  onClick={(e) => handleGenreClick(e)}
-                />
-                Action
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  value={"12"}
-                  onClick={(e) => handleGenreClick(e)}
-                />
-                Adventure
-              </label>
+              {searchOptionValue == "movie" ? (
+                <label>
+                  <input
+                    type="checkbox"
+                    value={"28"}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  Action
+                </label>
+              ) : (
+                <label>
+                  <input
+                    type="checkbox"
+                    value={"10759"}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  Action & Adventure
+                </label>
+              )}
+              {searchOptionValue == "movie" ? (
+                <label>
+                  <input
+                    type="checkbox"
+                    value={"12"}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  Adventure
+                </label>
+              ) : (
+                <label>
+                  <input
+                    type="checkbox"
+                    value={"10751"}
+                    onClick={(e) => handleGenreClick(e)}
+                  />
+                  Family
+                </label>
+              )}
               {seeMoreClick &&
+                searchOptionValue == "movie" &&
                 genreArray.map((genre, i) => {
+                  return (
+                    <label key={genre.id + i}>
+                      <input
+                        type="checkbox"
+                        value={genre.id}
+                        onClick={(e) => handleGenreClick(e)}
+                      />
+                      {genre.name}
+                    </label>
+                  );
+                })}
+              {seeMoreClick &&
+                searchOptionValue == "tv" &&
+                tvGenreArray.map((genre, i) => {
                   return (
                     <label key={genre.id + i}>
                       <input
@@ -171,10 +212,10 @@ export default function Inputs({
               )}
             </div>
             <div className="release-date-container">
-            <select onChange={(e) => setSearchOptionValue(e.target.value)}>
-              <option value="movie">Movies</option>
-              <option value="tv">TV shows</option>
-            </select>
+              <select onChange={(e) => setSearchOptionValue(e.target.value)}>
+                <option value="movie">Movies</option>
+                <option value="tv">TV shows</option>
+              </select>
               <form>
                 <input
                   placeholder="Release date"
