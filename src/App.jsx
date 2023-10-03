@@ -4,11 +4,15 @@ import {
   getDetailsById,
   getDiscover,
   getMovieBySearch,
+  getTVShowBySearch,
+  getTVShowCreditsById,
+  getTVShowDetailsById,
 } from "./utils/tmdb-utils";
 import MovieCard from "./components/MovieCard";
 import "./App.css";
 import Inputs from "./components/Inputs";
 import DetailCard from "./components/DetailCard";
+import TVShowDetailCard from "./components/TVShowDetailCard";
 
 function App() {
   const [genreClick, setGenreClick] = useState([]);
@@ -21,6 +25,7 @@ function App() {
   const [movieDetails, setMovieDetails] = useState({});
   const [didClickMovieCard, setDidClickMovieCard] = useState(false);
   const [didClickCarrot, setDidClickCarrot] = useState(false);
+  const [didClickTVCarrot, setDidClickTVCarrot] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [movieId, setMovieId] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -29,7 +34,12 @@ function App() {
   const [persistentSearch, setPersistentSearch] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
   const [credits, setCredits] = useState([]);
+  const [TVCredits, setTVCredits] = useState([]);
+
   const [splashPage, setSplashPage] = useState(true);
+  const [didClickHandleSubmit, setDidClickHandleSubmit] = useState(false);
+  const [didClickTVShowCard, setDidClickTVShowCard] = useState(false);
+  const [TVShowDetails, setTVShowDetails] = useState({});
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -48,59 +58,105 @@ function App() {
   }
 
   async function handleMovieCardClick(id) {
-    const creditResult = await getCreditsById(id);
-    setCredits(creditResult);
-    const result = await getDetailsById(id);
-    setMovieDetails(result);
-    document.body.style.overflow = "hidden";
-    setDidClickMovieCard(true);
+    if (didClickHandleSubmit) {
+      const creditResult = await getCreditsById(id);
+      setCredits(creditResult);
+      const result = await getDetailsById(id);
+      setMovieDetails(result);
+      document.body.style.overflow = "hidden";
+      setDidClickMovieCard(true);
+    } else {
+      const tvCreditResult = await getTVShowCreditsById(id);
+      setTVCredits(tvCreditResult);
+      const tvResult = await getTVShowDetailsById(id);
+      setTVShowDetails(tvResult);
+      document.body.style.overflow = "hidden";
+      setDidClickTVShowCard(true);
+    }
   }
 
-  async function handleCarrotClick(movieId, carrotDirection) {
-    const currentMovieIndex = searchResult
-      .map((movie) => movie.id)
-      .indexOf(movieId);
+  async function handleCarrotClick(id, carrotDirection) {
+    const currentIndex = searchResult.map((result) => result.id).indexOf(id);
 
-    if (carrotDirection === "right") {
-      const results =
-        currentMovieIndex === searchResult.length - 1
-          ? await getDetailsById(searchResult[0].id)
-          : await getDetailsById(searchResult[currentMovieIndex + 1].id);
-      const creditResult =
-        currentMovieIndex === searchResult.length - 1
-          ? await getCreditsById(searchResult[0].id)
-          : await getCreditsById(searchResult[currentMovieIndex + 1].id);
-      setCredits(creditResult);
-      setMovieDetails(results);
-      setDidClickCarrot(true);
-    } else if (carrotDirection === "left") {
-      const results =
-        currentMovieIndex === 0
-          ? await getDetailsById(searchResult[searchResult.length - 1].id)
-          : await getDetailsById(searchResult[currentMovieIndex - 1].id);
-      const creditResult =
-        currentMovieIndex === 0
-          ? await getCreditsById(searchResult[searchResult.length - 1].id)
-          : await getCreditsById(searchResult[currentMovieIndex - 1].id);
-      setCredits(creditResult);
-      setMovieDetails(results);
-      setDidClickCarrot(true);
+    if (didClickHandleSubmit) {
+      if (carrotDirection === "right") {
+        const results =
+          currentIndex === searchResult.length - 1
+            ? await getDetailsById(searchResult[0].id)
+            : await getDetailsById(searchResult[currentIndex + 1].id);
+        const creditResult =
+          currentIndex === searchResult.length - 1
+            ? await getCreditsById(searchResult[0].id)
+            : await getCreditsById(searchResult[currentIndex + 1].id);
+        setCredits(creditResult);
+        setMovieDetails(results);
+        setDidClickCarrot(true);
+      } else if (carrotDirection === "left") {
+        const results =
+          currentIndex === 0
+            ? await getDetailsById(searchResult[searchResult.length - 1].id)
+            : await getDetailsById(searchResult[currentIndex - 1].id);
+        const creditResult =
+          currentIndex === 0
+            ? await getCreditsById(searchResult[searchResult.length - 1].id)
+            : await getCreditsById(searchResult[currentIndex - 1].id);
+        setCredits(creditResult);
+        setMovieDetails(results);
+        setDidClickCarrot(true);
+      }
+    } else {
+      if (carrotDirection === "right") {
+        const results =
+          currentIndex === searchResult.length - 1
+            ? await getTVShowDetailsById(searchResult[0].id)
+            : await getTVShowDetailsById(searchResult[currentIndex + 1].id);
+        const creditResult =
+          currentIndex === searchResult.length - 1
+            ? await getTVShowCreditsById(searchResult[0].id)
+            : await getTVShowCreditsById(searchResult[currentIndex + 1].id);
+        setTVCredits(creditResult);
+        setTVShowDetails(results);
+        setDidClickTVCarrot(true);
+      } else if (carrotDirection === "left") {
+        const results =
+          currentIndex === 0
+            ? await getTVShowDetailsById(
+                searchResult[searchResult.length - 1].id
+              )
+            : await getTVShowDetailsById(searchResult[currentIndex - 1].id);
+        const creditResult =
+          currentIndex === 0
+            ? await getTVShowCreditsById(
+                searchResult[searchResult.length - 1].id
+              )
+            : await getTVShowCreditsById(searchResult[currentIndex - 1].id);
+        setTVCredits(creditResult);
+        setTVShowDetails(results);
+        setDidClickTVCarrot(true);
+      }
     }
   }
 
   function handleDetailCardClick() {
     document.body.style.overflow = "";
-    setDidClickMovieCard(false);
+    if (didClickMovieCard) {
+      setDidClickMovieCard(false);
+    } else if (didClickTVShowCard) {
+      setDidClickTVShowCard(false);
+    }
     setDidClickCarrot(false);
+    setDidClickTVCarrot(false);
   }
 
   function handleMouseEnter(movieId) {
     setIsHover(true);
     setMovieId(movieId);
   }
+
   function handleMouseLeave() {
     setIsHover(false);
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const result = await getMovieBySearch(search);
@@ -110,6 +166,22 @@ function App() {
     setPage(1);
     setDidClickMovieCard(false);
     setSplashPage(false);
+    setDidClickHandleSubmit(true);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  async function handleTVSearchSubmit(e) {
+    e.preventDefault();
+    const result = await getTVShowBySearch(search);
+    setSearchResult(result);
+    setPersistentSearch(search);
+    setSearch("");
+    setDidClickTVShowCard(false);
+    setSplashPage(false);
+    setDidClickHandleSubmit(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -120,14 +192,11 @@ function App() {
     setIsChecked(false);
   }, [searchResult]);
 
-  console.log("splashPage", splashPage);
-
-  console.log("searchResult", searchResult);
   return (
     <>
       <div className="parent">
-        {!didClickMovieCard && (
-          <header className={splashPage ? "splash-header" : "header"}>
+        {!didClickMovieCard & !didClickTVShowCard && (
+          <header className="header">
             {!isChecked && (
               <Inputs
                 inputToggle={inputToggle}
@@ -142,9 +211,11 @@ function App() {
                 search={search}
                 setSearch={setSearch}
                 handleSubmit={handleSubmit}
+                handleTVSearchSubmit={handleTVSearchSubmit}
                 setSearchResult={setSearchResult}
                 setIsChecked={setIsChecked}
                 setDidClickDiscover={setDidClickDiscover}
+                setDidClickHandleSubmit={setDidClickHandleSubmit}
                 setSplashPage={setSplashPage}
               />
             )}
@@ -207,6 +278,14 @@ function App() {
               handleDetailCardClick={handleDetailCardClick}
               handleCarrotClick={handleCarrotClick}
               credits={credits}
+            />
+          )}
+          {(didClickTVShowCard || didClickTVCarrot) && (
+            <TVShowDetailCard
+              TVShowDetails={TVShowDetails}
+              handleDetailCardClick={handleDetailCardClick}
+              handleCarrotClick={handleCarrotClick}
+              credits={TVCredits}
             />
           )}
         </div>
