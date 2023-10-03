@@ -43,7 +43,11 @@ function App() {
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
-      const res = await getMovieBySearch(persistentSearch, page + 1);
+      if (didClickHandleSubmit) {}
+      const res = didClickHandleSubmit ? 
+      await getMovieBySearch(persistentSearch, page + 1)
+      : await getTVShowBySearch(persistentSearch, page + 1);
+      // const res = await getMovieBySearch(persistentSearch, page + 1);
       setSearchResult([...searchResult, ...res]);
     } else {
       const { results } = await getDiscover(
@@ -179,6 +183,7 @@ function App() {
     setSearchResult(result);
     setPersistentSearch(search);
     setSearch("");
+    setPage(1)
     setDidClickTVShowCard(false);
     setSplashPage(false);
     setDidClickHandleSubmit(false);
@@ -187,8 +192,6 @@ function App() {
       behavior: "smooth",
     });
   }
-
-  console.log(movieId)
 
   useEffect(() => {
     setIsChecked(false);
@@ -239,7 +242,6 @@ function App() {
             <p>Sorry, no results!</p>
           ) : (
             searchResult.map((movie, i) => {
-              console.log(movie)
               if (isHover & (movie.id === movieId)) {
                 return (
                   <>

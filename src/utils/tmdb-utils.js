@@ -46,9 +46,9 @@ async function getCreditsById(id) {
   return results;
 }
 
-async function getTVShowBySearch(search) {
+async function getTVShowBySearch(search, page = 1) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=en-US&page=1&api_key=46db8a5c2f862f015781b602a58bdd9d`
+    `https://api.themoviedb.org/3/search/tv?query=${search}&include_adult=false&language=en-US&page=${page}&api_key=46db8a5c2f862f015781b602a58bdd9d`
   );
   const { results } = await response.json();
   return results;
