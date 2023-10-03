@@ -42,16 +42,15 @@ function App() {
   const [TVShowDetails, setTVShowDetails] = useState({});
   const [searchOptionValue, setSearchOptionValue] = useState("movie");
 
-
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
-      if (didClickHandleSubmit) {}
-      const res = didClickHandleSubmit ? 
-      await getMovieBySearch(persistentSearch, page + 1)
-      : await getTVShowBySearch(persistentSearch, page + 1);
+      const res = didClickHandleSubmit
+        ? await getMovieBySearch(persistentSearch, page + 1)
+        : await getTVShowBySearch(persistentSearch, page + 1);
       setSearchResult([...searchResult, ...res]);
     } else {
       const { results } = await getDiscover(
+        searchOptionValue,
         persistentReleaseDateValue,
         persistentGenreClick,
         page + 1
@@ -184,7 +183,7 @@ function App() {
     setSearchResult(result);
     setPersistentSearch(search);
     setSearch("");
-    setPage(1)
+    setPage(1);
     setDidClickTVShowCard(false);
     setSplashPage(false);
     setDidClickHandleSubmit(false);
@@ -249,12 +248,11 @@ function App() {
                 return (
                   <>
                     <div className="movie-card-container">
-                      {
-                        movie.title ? 
+                      {movie.title ? (
                         <h4>{movie.title}</h4>
-                        :
-                       <h4>{movie.name}</h4> 
-                      }
+                      ) : (
+                        <h4>{movie.name}</h4>
+                      )}
                       <MovieCard
                         handleMovieCardClick={handleMovieCardClick}
                         movieObject={movie}
