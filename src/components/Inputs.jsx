@@ -22,10 +22,12 @@ export default function Inputs({
   setInputToggle,
   setSplashPage,
   handleTVSearchSubmit,
+  searchOptionValue,
+  setSearchOptionValue
 }) {
   const [seeMoreClick, setSeeMoreClick] = useState(false);
-  const [searchOptionValue, setSearchOptionValue] = useState("Movies");
-
+  // const [searchOptionValue, setSearchOptionValue] = useState("Movies");
+console.log(searchOptionValue)
   function checkValue(array, value) {
     if (array.includes(value)) {
       const updatedArray = array.filter((item) => item !== value);
@@ -51,7 +53,8 @@ export default function Inputs({
       return alert("Please enter a valid date between 1888 and present");
     } else {
       const genres = genreClick.join();
-      const { results } = await getDiscover(releaseDateValue, genres);
+      const { results } = await getDiscover(searchOptionValue, releaseDateValue, genres);
+      console.log(results)
       setSearchResult(results);
       setPersistentGenreClick(genreClick);
       setPersistentReleaseDateValue(releaseDateValue);
@@ -89,8 +92,8 @@ export default function Inputs({
         {!inputToggle ? (
           <div className="search-container">
             <select onChange={(e) => setSearchOptionValue(e.target.value)}>
-              <option value="Movies">Movies</option>
-              <option value="TV-shows">TV shows</option>
+              <option value="movie">Movies</option>
+              <option value="tv">TV shows</option>
             </select>
             <form>
               <input
@@ -99,7 +102,7 @@ export default function Inputs({
                 type="text"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              {searchOptionValue === "Movies" ? (
+              {searchOptionValue === "movie" ? (
                 <button type="submit" onClick={(e) => handleSubmit(e)}>
                   <img src="search.svg" />
                 </button>
@@ -166,6 +169,10 @@ export default function Inputs({
               )}
             </div>
             <div className="release-date-container">
+            <select onChange={(e) => setSearchOptionValue(e.target.value)}>
+              <option value="movie">Movies</option>
+              <option value="tv">TV shows</option>
+            </select>
               <form>
                 <input
                   placeholder="Release date"
@@ -187,7 +194,9 @@ export default function Inputs({
 
 Inputs.propTypes = {
   search: PropTypes.string.isRequired,
+  searchOptionValue: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
+  setSearchOptionValue: PropTypes.func.isRequired,
   releaseDateValue: PropTypes.string.isRequired,
   setSearchResult: PropTypes.func.isRequired,
   inputToggle: PropTypes.bool.isRequired,

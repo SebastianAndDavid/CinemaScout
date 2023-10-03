@@ -40,6 +40,8 @@ function App() {
   const [didClickHandleSubmit, setDidClickHandleSubmit] = useState(false);
   const [didClickTVShowCard, setDidClickTVShowCard] = useState(false);
   const [TVShowDetails, setTVShowDetails] = useState({});
+  const [searchOptionValue, setSearchOptionValue] = useState("movie");
+
 
   async function handleSeeMoreResultsClick() {
     if (!inputToggle) {
@@ -47,7 +49,6 @@ function App() {
       const res = didClickHandleSubmit ? 
       await getMovieBySearch(persistentSearch, page + 1)
       : await getTVShowBySearch(persistentSearch, page + 1);
-      // const res = await getMovieBySearch(persistentSearch, page + 1);
       setSearchResult([...searchResult, ...res]);
     } else {
       const { results } = await getDiscover(
@@ -222,6 +223,8 @@ function App() {
                 setDidClickDiscover={setDidClickDiscover}
                 setDidClickHandleSubmit={setDidClickHandleSubmit}
                 setSplashPage={setSplashPage}
+                searchOptionValue={searchOptionValue}
+                setSearchOptionValue={setSearchOptionValue}
               />
             )}
           </header>
