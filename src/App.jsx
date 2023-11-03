@@ -230,7 +230,35 @@ function App() {
         )}
         {splashPage && (
           <div className="splash-page">
-            <img src="bunnycage.jpg" />
+            <h1>CinemaScout</h1>
+            <p>
+              CinemaScout is here to help you find your next favorite TV show or
+              film!
+            </p>
+            <p>
+              Here you&apos;ll find millions of TV shows and movies to discover.
+            </p>
+            <div className="instructions">
+              <ul>
+                <li>
+                  Use the select element above the search bar to search for
+                  movies or tv shows
+                </li>
+                <li>Use the search bar to search for a title</li>
+                <li>Click the 🔮 to discover</li>
+                <li>Click the 🔍 icon to search</li>
+                <li>
+                  🔮 discover can search by genre and/or release date. Click the
+                  button with the globe icon to discover
+                </li>
+                <li>
+                  Built using TMDB&apos;s API - TMDB includes specific
+                  &apos;adult film&apos; filters. While &apos;adult films&apos;
+                  are filtered out on this front-end, some results may not meet
+                  TMDB&apos;s filters. Additional filters coming soon.
+                </li>
+              </ul>
+            </div>
           </div>
         )}
         <div
